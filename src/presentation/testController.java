@@ -1,31 +1,38 @@
-package domain;
+package presentation;
 
 
 
 import java.io.IOException;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/GetPerson")
-public class GetPerson extends AbstractPageController {
+import domain.UserRDG;
+
+//controller used to test
+
+@WebServlet("/test")
+public class testController extends AbstractPageController {
 	private static final long serialVersionUID = 1L;
        
-    public GetPerson() {
+    public testController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
-			UserRDG user = UserRDG.find(1);
+			PrintWriter out = response.getWriter();
 			
-			request.setAttribute("user", user);
-			//request.getRequestDispatcher("/WEB-INF/jsp/person.jsp").forward(request, response);
-			System.out.println(user.getUsername());
-			
+			UserRDG users = UserRDG.find("george");
+			out.println(users.getId());
+		
+			out.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();

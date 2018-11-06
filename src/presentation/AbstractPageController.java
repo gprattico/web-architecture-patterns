@@ -1,4 +1,4 @@
-package domain;
+package presentation;
 
 
 import java.io.IOException;
@@ -12,6 +12,9 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
+/*
+ * Useful when extended, child servlet calls this init and loads the db  
+*/
 @WebServlet("/AbstractPageController")
 public class AbstractPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,10 +32,10 @@ public class AbstractPageController extends HttpServlet {
     	
     	try {
     		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-    		String key = "";
+    		String blank = "";
     		MySQLConnectionFactory connectionFactory = new MySQLConnectionFactory(null, null, null, null);
     		connectionFactory.defaultInitialization();
-    		DbRegistry.setConFactory(key, connectionFactory);
+    		DbRegistry.setConFactory(blank, connectionFactory);
     	}
     	catch (Exception e) {
     		e.printStackTrace();
