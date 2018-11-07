@@ -175,10 +175,10 @@ public class UserRDG {
 		ps.close();
 		
 		//because the UML_solution.pdf asks for only one User, we return only the first instance in ArrayList
-		if(userList.get(0) != null)
-		return userList.get(0);
-		else
+		if(userList.size() ==0)
 			return null;
+		else
+			return userList.get(0);
 		
 		
 	}

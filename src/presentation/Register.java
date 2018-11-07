@@ -2,11 +2,14 @@ package presentation;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import domain.UserRDG;
 
 /**
  * Servlet implementation class Register
@@ -29,7 +32,7 @@ public class Register extends AbstractController {
 			PrintWriter out = response.getWriter();
 			out.println("You are already logged in.");
 			out.close();
-			
+
 		}
 		else{
 			request.getRequestDispatcher("WEB-INF/jsp/Register.jsp").forward(request, response);
@@ -37,22 +40,42 @@ public class Register extends AbstractController {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		/*
-		 * if username null or password null passowrd empty or user empty
-		 * 		forward to main.jsp
-		 *	else if 
-		 */
+		try {
 		String username = request.getParameter("user");
 		String password = request.getParameter("pass");
 		
 		if(username==null || username.isEmpty() || password==null || password.isEmpty()){
 			request.setAttribute("message", "You must enter a username and password");
 			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
-
 		}
 		else{
 			//check if user already exists, if not create new user
+			UserRDG user;
+			
+				user = UserRDG.find(username);
+				
+				if(user !=null){
+					request.setAttribute("message", "That username has been taken.");
+					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
+
+				} else {
+					user = new UserRDG(UserRDG.getMaxID(),1,username,password);
+					
+					user.insert();
+					long id = user.getId();
+					
+					request.getSession(true).setAttribute("id", id);
+					request.setAttribute("message", "Hi "+username+", you have been registered!");
+					request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
+				}
+			} 
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
 		}
+		
 		
 	}
 
