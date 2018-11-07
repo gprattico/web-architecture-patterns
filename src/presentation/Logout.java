@@ -33,7 +33,7 @@ public class Logout extends AbstractController {
 		
 		}catch(Exception e){
 			e.printStackTrace();
-			request.setAttribute("message", "You are not logged cannot log out.");
+			request.setAttribute("message", "You are not logged in, cannot log out.");
 			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			
 
