@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
+/*
+The use of MaxID to auto increment instead of allowing the db to do this comes from the thesis of stuart thiel
+https://users.encs.concordia.ca/~sthiel/soen387/Thesis_Stuart.pdf page 61
+*/
 public class UserRDG {
 
 	private long id;
@@ -52,6 +56,7 @@ public class UserRDG {
 		return id;
 	}
 	
+	//method mae synchronized because we dont want users simulataneously getting the same ID
 	public static synchronized long getMaxID() throws SQLException{
 		
 		//need the if 0 or else can't insert more than one at a time
@@ -149,7 +154,7 @@ public class UserRDG {
 	}
 	
 	
-	//reutrns a list of UserRDG TO BE CHANGED FOR USER DOMAIN OBJECTS
+	//returns a list of UserRDG
 	public static UserRDG find(String username) throws SQLException{
 		
 		Connection con = DbRegistry.getDbConnection();

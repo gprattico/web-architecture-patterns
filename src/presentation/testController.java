@@ -17,7 +17,7 @@ import domain.UserRDG;
 //controller used to test
 
 @WebServlet("/test")
-public class testController extends AbstractPageController {
+public class testController extends AbstractController {
 	private static final long serialVersionUID = 1L;
        
     public testController() {
