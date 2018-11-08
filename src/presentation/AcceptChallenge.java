@@ -34,27 +34,12 @@ public class AcceptChallenge extends AbstractController {
 					if(rdg.getChallengee()==(long)request.getSession().getAttribute("id"))
 					challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
 				}
-//				
-				//get challenger names
-//				if(challenge.size()==0){
-//					
-//					request.setAttribute("message", "No challenges.");
-//					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
-//					
-//				}else{
-////				String names [] = new String [challenge.size()];
-////				for(int i=0; i<=names.length; i++){
-////					names[i] = challe
-////				}
-//					ChallengeHelper helper2 = null;
-//					ArrayList<UserRDG> challengerNames = new ArrayList<UserRDG>();
-//					for(int i=0; i<=challenge.size();i++){
-//						helper2 = challenge.get(i);
-//						challengerNames.add(UserRDG.find(helper2.getId()));
-//					}
-//					request.setAttribute("names", challengerNames);
-					request.setAttribute("challenge", challenge);
-					request.getRequestDispatcher("WEB-INF/jsp/AcceptChallenges.jsp").forward(request, response);
+				
+				PrintWriter out = response.getWriter();
+				out.println(challenge.get(0).findChallengerUsername());
+				out.close();
+//					request.setAttribute("challenge", challenge);
+//					request.getRequestDispatcher("WEB-INF/jsp/AcceptChallenges.jsp").forward(request, response);
 //				}
 			}else{
 				request.setAttribute("message", "You are not logged in.");

@@ -1,5 +1,9 @@
 package domain;
 
+import java.sql.SQLException;
+
+import dataSrc.UserRDG;
+
 public class ChallengeHelper {
 
 	private long id;
@@ -41,6 +45,15 @@ public class ChallengeHelper {
 
 	public long getId() {
 		return id;
+	}
+	//returns the username of the challenger in this challenge
+	public String findChallengerUsername() throws SQLException{
+		UserRDG rdg = UserRDG.find(challenger);
+		
+		String temp="";
+		temp = rdg.getUsername();	
+		
+		return temp;
 	}
 
 }

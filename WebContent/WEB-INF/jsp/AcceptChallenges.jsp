@@ -9,7 +9,7 @@
 </head>
 <body>
 <center>
-<h3> Choose a player to Challenge</h3>
+<h3> Choose a Challenge to accept</h3>
 	
 
 <form method="post">
