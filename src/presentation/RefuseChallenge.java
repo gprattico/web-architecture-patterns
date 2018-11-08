@@ -1,10 +1,8 @@
 package presentation;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.ChallengeRDG;
-import dataSrc.UserRDG;
 import domain.ChallengeHelper;
 import domain.ChallengeStatus;
 
-@WebServlet("/AcceptChallenge")
-public class AcceptChallenge extends AbstractController {
+/**
+ * Servlet implementation class RefuseChallenge
+ */
+@WebServlet("/RefuseChallenge")
+public class RefuseChallenge extends AbstractController {
 	private static final long serialVersionUID = 1L;
 	HashMap <Integer,String> display = new HashMap <Integer,String>();
 
-	public AcceptChallenge() {
+    public RefuseChallenge() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		try{
 			
 			if(checkIfLoggedIn(request)){
@@ -45,7 +46,7 @@ public class AcceptChallenge extends AbstractController {
 				}
 				
 					request.setAttribute("challenges", display);
-					request.getRequestDispatcher("WEB-INF/jsp/AcceptChallenges.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/jsp/RefuseChallenges.jsp").forward(request, response);
 			}else{
 				request.setAttribute("message", "You are not logged in.");
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
@@ -59,10 +60,11 @@ public class AcceptChallenge extends AbstractController {
 		}finally{
 			closeDb();
 		}
-		
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		try{
 			if(checkIfLoggedIn(request)){
 //				
@@ -73,10 +75,10 @@ public class AcceptChallenge extends AbstractController {
 //				
 				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenges")));
 				
-				fetch.setStatus(ChallengeStatus.accepted.ordinal());
+				fetch.setStatus(ChallengeStatus.refused.ordinal());
 				fetch.update();
 				display.remove(Integer.parseInt(request.getParameter("challenges")));
-				request.setAttribute("message", "You accepted the challenge!");
+				request.setAttribute("message", "You refused the challenge!");
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				
 			}else{
@@ -92,7 +94,6 @@ public class AcceptChallenge extends AbstractController {
 		}finally{
 			closeDb();
 		}
-		
 	}
 
 }
