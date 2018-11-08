@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.UserRDG;
+import dataSrc.UserRDG;
 
 /**
  * Servlet implementation class Register
@@ -37,6 +37,8 @@ public class Register extends AbstractController {
 		else{
 			request.getRequestDispatcher("WEB-INF/jsp/Register.jsp").forward(request, response);
 		}
+		
+		closeDb();
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -74,6 +76,8 @@ public class Register extends AbstractController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
+		} finally {
+			closeDb();
 		}
 		
 		

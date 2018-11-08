@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.UserRDG;
+import dataSrc.ChallengeRDG;
+import dataSrc.UserRDG;
+import domain.ChallengeStatus;
 
 //controller used to test
 
@@ -29,13 +31,15 @@ public class testController extends AbstractController {
 			
 			PrintWriter out = response.getWriter();
 			
-			UserRDG users = UserRDG.find("george");
-			out.println(users.getId());
+			out.println(ChallengeStatus.open.ordinal());
 		
 			out.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			PrintWriter out = response.getWriter();
+			out.print("bad request");
+			out.close();
 		}
 		finally {
 			closeDb();

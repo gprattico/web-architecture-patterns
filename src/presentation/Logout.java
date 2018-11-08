@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.UserRDG;
+import dataSrc.UserRDG;
 
 /**
  * Servlet implementation class Logout
@@ -37,6 +37,9 @@ public class Logout extends AbstractController {
 			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			
 
+		}finally{
+			
+			closeDb();
 		}
 	}
 

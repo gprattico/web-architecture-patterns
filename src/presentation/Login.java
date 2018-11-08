@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataSrc.UserRDG;
 import domain.UserHelper;
-import domain.UserRDG;
 
 /**
  * Servlet implementation class Login
@@ -30,6 +30,9 @@ public class Login extends AbstractController {
 		}else{
 			request.getRequestDispatcher("WEB-INF/jsp/Login.jsp").forward(request, response);
 		}
+		
+		closeDb();
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -67,6 +70,8 @@ public class Login extends AbstractController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
+		} finally {
+			closeDb();
 		}
 		
 	}
