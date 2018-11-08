@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.UserRDG;
-import domain.UserHelper;
 
 /**
  * Servlet implementation class Login

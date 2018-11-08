@@ -8,31 +8,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataSrc.ChallengeRDG;
 import dataSrc.UserRDG;
+import domain.ChallengeHelper;
 import domain.UserHelper;
 
 /**
- * Servlet implementation class ListPlayers
+ * Servlet implementation class ListChallenges
  */
-@WebServlet("/ListPlayers")
-public class ListPlayers extends AbstractController {
+@WebServlet("/ListChallenges")
+public class ListChallenges extends AbstractController {
 	private static final long serialVersionUID = 1L;
-    public ListPlayers() {
+       
+    public ListChallenges() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		try{
 			
 			if(checkIfLoggedIn(request)){
-				ArrayList<UserRDG> rdgUsers = UserRDG.findAll();
-				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
+				ArrayList<ChallengeRDG> rdgchallenge = ChallengeRDG.findAllOpen();
+				ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
 							
-				for(UserRDG rdg : rdgUsers)
-					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
+				for(ChallengeRDG rdg : rdgchallenge)
+					challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
 				
-					request.setAttribute("players", user);
-					request.getRequestDispatcher("WEB-INF/jsp/ListPlayers.jsp").forward(request, response);
+					request.setAttribute("challenges", challenge);
+					request.getRequestDispatcher("WEB-INF/jsp/ListChallenges.jsp").forward(request, response);
 				
 			}else{
 				request.setAttribute("message", "You are not logged in.");
@@ -40,11 +44,12 @@ public class ListPlayers extends AbstractController {
 			}
 		}catch(Exception e){
 			
+			request.setAttribute("message", "You are not logged in.");
+			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
+			
 		}finally{
 			closeDb();
 		}
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

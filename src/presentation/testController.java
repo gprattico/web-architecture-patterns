@@ -3,9 +3,7 @@ package presentation;
 
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.ChallengeRDG;
-import dataSrc.UserRDG;
 import domain.ChallengeStatus;
 
 //controller used to test
@@ -31,7 +28,8 @@ public class testController extends AbstractController {
 			
 			PrintWriter out = response.getWriter();
 			
-			out.println(ChallengeStatus.open.ordinal());
+			ChallengeRDG rdg = new ChallengeRDG(ChallengeRDG.getMaxChallengeID(),3,2,0);
+			rdg.insert();
 		
 			out.close();
 		}
