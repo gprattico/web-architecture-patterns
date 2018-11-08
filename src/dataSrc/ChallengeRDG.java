@@ -139,7 +139,7 @@ public class ChallengeRDG {
 		//temp user
 		ChallengeRDG challenge = null;
 		if (rs.next()) {
-			challenge = new ChallengeRDG(rs.getLong("id"), rs.getLong("challengee"), rs.getLong("challengee"), rs.getInt("status"));
+			challenge = new ChallengeRDG(rs.getLong("id"), rs.getLong("challenger"), rs.getLong("challengee"), rs.getInt("status"));
 		}
 		
 		rs.close();
