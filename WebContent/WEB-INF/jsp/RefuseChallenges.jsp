@@ -9,7 +9,7 @@
 </head>
 <body>
 <center>
-<h3> Choose a Challenge to accept</h3>
+<h3> Choose a Challenge to refuse</h3>
 	
 
 <form method="post">
@@ -20,7 +20,7 @@
 		</c:forEach>
 	</select>
 	<br><br><br>
-	<button type="submit">Challenge</button>
+	<button type="submit">Refuse</button>
 </form>
 
 

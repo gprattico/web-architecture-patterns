@@ -10,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataSrc.CardRDG;
 import dataSrc.ChallengeRDG;
+import dataSrc.DeckRDG;
 import domain.ChallengeStatus;
 
 //controller used to test
@@ -28,8 +30,8 @@ public class testController extends AbstractController {
 			
 			PrintWriter out = response.getWriter();
 			
-			ChallengeRDG rdg = new ChallengeRDG(ChallengeRDG.getMaxChallengeID(),3,2,0);
-			rdg.insert();
+			CardRDG card1 = new CardRDG(CardRDG.getMaxCardID(),2,"energy","a lot");
+			card1.insert();
 		
 			out.close();
 		}
