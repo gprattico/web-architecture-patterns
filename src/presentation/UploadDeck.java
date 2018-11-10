@@ -61,9 +61,9 @@ public class UploadDeck extends AbstractController {
 			
 			if(checkIfLoggedIn(request)){
 				
-				DeckRDG deckRdg = DeckRDG.find((long)request.getSession(true).getAttribute("id"));
+				DeckRDG deckRdg = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
 				if(deckRdg ==null){
-					String deckString = request.getParameter("deckbox");
+					String deckString = request.getParameter("deck");
 					//check if empty
 					if(deckString.equals("") || deckString ==null){
 						request.setAttribute("message", "Please enter 40 cards.");

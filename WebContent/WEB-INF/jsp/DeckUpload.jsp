@@ -13,7 +13,7 @@
 		 
 			 <p>Enter a deck of exactly 40 cards.</p>
 				 <form method="post">
-					<textarea name="deckbox" rows="30" cols="50"></textarea>
+					<textarea name="deck" rows="30" cols="50"></textarea>
 					<br>
 					<button type="submit">Enter</button>
 				</form>

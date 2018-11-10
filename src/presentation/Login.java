@@ -21,17 +21,7 @@ public class Login extends AbstractController {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		if(checkIfLoggedIn(request)){
-			PrintWriter out = response.getWriter();
-			out.println("You are already logged in.");
-			out.close();
-		}else{
-			request.getRequestDispatcher("WEB-INF/jsp/Login.jsp").forward(request, response);
-		}
-		
-		closeDb();
-		
+		request.getRequestDispatcher("WEB-INF/jsp/Login.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
