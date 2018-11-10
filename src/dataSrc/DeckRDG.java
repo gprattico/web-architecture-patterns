@@ -121,5 +121,25 @@ public static synchronized long getMaxDeckID() throws SQLException{
 		
 	}
 	
+	public static DeckRDG findByUserID(long id) throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM deck WHERE userID = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, id);
+		ResultSet rs = ps.executeQuery();
+		DeckRDG deck = null;
+		if (rs.next()) {
+			deck = new DeckRDG(rs.getLong("id"), rs.getLong("userID"));
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return deck;
+		
+	}
+	
 
 }

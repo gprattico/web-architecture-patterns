@@ -28,7 +28,8 @@ public class UploadDeck extends AbstractController {
 		try{
 			if(checkIfLoggedIn(request)){
 				
-				DeckRDG deck = DeckRDG.find((long)request.getSession(true).getAttribute("id"));
+				DeckRDG deck = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
+							
 				
 				if(deck ==null){
 					request.getRequestDispatcher("WEB-INF/jsp/DeckUpload.jsp").forward(request, response);

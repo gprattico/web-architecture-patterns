@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
@@ -22,6 +23,34 @@ public class CardRDG {
 		this.name = name;
 	}
 	
+	public long getDeck() {
+		return deck;
+	}
+
+	public void setDeck(long deck) {
+		this.deck = deck;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public long getId() {
+		return id;
+	}
+
 	public static synchronized long getMaxCardID() throws SQLException{
 		
 		//need the if 0 or else can't insert more than one at a time
@@ -68,6 +97,30 @@ public class CardRDG {
 		int count = ps.executeUpdate();
 		ps.close();
 		return count;
+	}
+	
+	public static ArrayList<CardRDG> findAll(long Deckid) throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM card WHERE deck = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, Deckid);
+		ResultSet rs = ps.executeQuery();
+		
+		//temp user
+		ArrayList<CardRDG> cardList = new ArrayList<CardRDG>(); 
+		while (rs.next()) {
+			cardList.add(new CardRDG(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name")));
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return cardList;
+		
+		
+		
 	}
 	
 
