@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.ChallengeRDG;
+import dataSrc.DeckRDG;
 import dataSrc.UserRDG;
 import domain.ChallengeHelper;
 import domain.UserHelper;
@@ -29,7 +30,7 @@ public class ChallengePlayer extends AbstractController {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		try{
 			
-			if(checkIfLoggedIn(request)&&hasDeck(request)){
+			if(checkIfLoggedIn(request)){
 				ArrayList<UserRDG> rdgUsers = UserRDG.findAll();
 				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
 							
@@ -37,9 +38,14 @@ public class ChallengePlayer extends AbstractController {
 					if(rdg.getId()!=(long)request.getSession().getAttribute("id"))
 					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
 				}
+				if(DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"))==null){
+					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
+					
+				}else {
+					
 					request.setAttribute("player", user);
 					request.getRequestDispatcher("WEB-INF/jsp/ChallengePlayer.jsp").forward(request, response);
-				
+				}
 			}else{
 				request.setAttribute("message", "You are not logged in or have no deck!");
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
@@ -56,7 +62,7 @@ public class ChallengePlayer extends AbstractController {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
 		try{
-			if(checkIfLoggedIn(request)){
+			if(checkIfLoggedIn(request)&&hasDeck(request)){
 				
 				ChallengeHelper helper = new ChallengeHelper(ChallengeRDG.getMaxChallengeID(),
 				(long)request.getSession().getAttribute("id"), Integer.parseInt(request.getParameter("player")),0 );
