@@ -45,7 +45,7 @@ public class RefuseChallenge extends AbstractController {
 					
 				}
 				
-					request.setAttribute("challenges", display);
+					request.setAttribute("challenge", display);
 					request.getRequestDispatcher("WEB-INF/jsp/RefuseChallenges.jsp").forward(request, response);
 			}else{
 				request.setAttribute("message", "You are not logged in.");
@@ -77,7 +77,7 @@ public class RefuseChallenge extends AbstractController {
 				
 				fetch.setStatus(ChallengeStatus.refused.ordinal());
 				fetch.update();
-				display.remove(Integer.parseInt(request.getParameter("challenges")));
+				display.remove(Integer.parseInt(request.getParameter("challenge")));
 				request.setAttribute("message", "You refused the challenge!");
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				

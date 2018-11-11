@@ -14,8 +14,8 @@
 
 <form method="post">
 	<label> Select one </label>
-	<select name="players">
-		<c:forEach items="${players}" var="choice">
+	<select name="player">
+		<c:forEach items="${player}" var="choice">
 			<option value="${choice.id}">${choice.username}</option>
 		</c:forEach>
 	</select>

@@ -38,7 +38,7 @@ public class ChallengePlayer extends AbstractController {
 					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
 				}
 				System.out.println(user.get(0).getUsername());
-					request.setAttribute("players", user);
+					request.setAttribute("player", user);
 					request.getRequestDispatcher("WEB-INF/jsp/ChallengePlayer.jsp").forward(request, response);
 				
 			}else{
@@ -58,7 +58,7 @@ public class ChallengePlayer extends AbstractController {
 			if(checkIfLoggedIn(request)){
 				
 				ChallengeHelper helper = new ChallengeHelper(ChallengeRDG.getMaxChallengeID(),
-				(long)request.getSession().getAttribute("id"), Integer.parseInt(request.getParameter("players")),0 );
+				(long)request.getSession().getAttribute("id"), Integer.parseInt(request.getParameter("player")),0 );
 				
 				ChallengeRDG rdg = new ChallengeRDG(helper.getId(),helper.getChallenger(),helper.getChallengee(),
 						helper.getStatus());

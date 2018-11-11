@@ -44,7 +44,7 @@ public class AcceptChallenge extends AbstractController {
 					
 				}
 				
-					request.setAttribute("challenges", display);
+					request.setAttribute("challenge", display);
 					request.getRequestDispatcher("WEB-INF/jsp/AcceptChallenges.jsp").forward(request, response);
 			}else{
 				request.setAttribute("message", "You are not logged in.");
