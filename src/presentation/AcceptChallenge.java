@@ -33,12 +33,11 @@ public class AcceptChallenge extends AbstractController {
 				ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
 				
 				for(ChallengeRDG rdg : rdgchallenge){
-					if((rdg.getChallenger()!=(long)request.getSession(true).getAttribute("id"))&&(rdg.getChallengee() == (long)request.getSession(true).getAttribute("id"))&&(rdg.getStatus()==0)){
+					if(rdg.getStatus()==0){
 						challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
 					}
 				}
 				
-				//up till here we are good. challenge is a lost of challenges against ONLY us and not made by US
 				for(ChallengeHelper helper : challenge){
 					display.put((int)helper.getId(), helper.findChallengerUsername());
 					
@@ -73,12 +72,17 @@ public class AcceptChallenge extends AbstractController {
 //				
 				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenge")));
 				
+				if(fetch.getChallengee()!=(long)request.getSession(true).getAttribute("id")) {
+					request.setAttribute("message", "You cannot accept a challenge not intended for you");
+					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
+				}else {
+				
 				fetch.setStatus(ChallengeStatus.accepted.ordinal());
 				fetch.update();
 				display.remove(Integer.parseInt(request.getParameter("challenge")));
 				request.setAttribute("message", "You accepted the challenge!");
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
-				
+				}
 			}else{
 
 				request.setAttribute("message", "Something went wrong");
