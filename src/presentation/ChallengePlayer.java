@@ -29,7 +29,7 @@ public class ChallengePlayer extends AbstractController {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		try{
 			
-			if(checkIfLoggedIn(request)){
+			if(checkIfLoggedIn(request)&&hasDeck(request)){
 				ArrayList<UserRDG> rdgUsers = UserRDG.findAll();
 				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
 							
@@ -37,15 +37,16 @@ public class ChallengePlayer extends AbstractController {
 					if(rdg.getId()!=(long)request.getSession().getAttribute("id"))
 					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
 				}
-				System.out.println(user.get(0).getUsername());
 					request.setAttribute("player", user);
 					request.getRequestDispatcher("WEB-INF/jsp/ChallengePlayer.jsp").forward(request, response);
 				
 			}else{
-				request.setAttribute("message", "You are not logged in.");
+				request.setAttribute("message", "You are not logged in or have no deck!");
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			}
 		}catch(Exception e){
+			request.setAttribute("message", "Exception caught");
+			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			
 		}finally{
 			closeDb();

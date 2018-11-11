@@ -35,7 +35,7 @@ public class ListChallenges extends AbstractController {
 				for(ChallengeRDG rdg : rdgchallenge)
 					challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
 				
-					request.setAttribute("challenges", challenge);
+					request.setAttribute("challenge", challenge);
 					request.getRequestDispatcher("WEB-INF/jsp/ListChallenges.jsp").forward(request, response);
 				
 			}else{

@@ -3,7 +3,7 @@
 
 {
 	"challenges": [
-		<c:forEach items="${challenges}" var="challenge" varStatus="loop">
+		<c:forEach items="${challenge}" var="challenge" varStatus="loop">
 			{"id": ${challenge.id}, "challenger": "${challenge.challenger}", "challengee": "${challenge.challengee}", "status": "${challenge.status}"}<c:if test="${!loop.last}">,</c:if>
 		</c:forEach>
 	]

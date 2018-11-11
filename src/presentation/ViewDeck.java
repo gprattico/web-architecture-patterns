@@ -34,7 +34,7 @@ public class ViewDeck extends AbstractController {
 				if(rdg == null){
 					request.setAttribute("message", "You don't have a deck.");
 					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
-				}
+				}else {
 				
 				//find all cards associated with this deck
 				long deckID = rdg.getId();
@@ -47,7 +47,7 @@ public class ViewDeck extends AbstractController {
 				request.setAttribute("deckID", deckID);
 				request.getRequestDispatcher("WEB-INF/jsp/ViewDeck.jsp").forward(request, response);
 				
-				
+				}
 				
 			}else{
 			

@@ -12,6 +12,8 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
+import dataSrc.DeckRDG;
+
 /*
  * Useful when extended, child servlet calls this init and loads the db. StartDb() and CloseDB(), as well as some other
  * methods such as the connection factories are taken from masters thesis of Stuart Thiel, available at:
@@ -83,6 +85,23 @@ public class AbstractController extends HttpServlet {
 			e.printStackTrace();
 			return false;
 		}
+		
+	}
+	
+	protected boolean hasDeck(HttpServletRequest request) {
+		
+		try {
+			DeckRDG rdg = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
+			if(rdg == null)
+				return false;
+			else
+				return true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 		
 	}
 	
