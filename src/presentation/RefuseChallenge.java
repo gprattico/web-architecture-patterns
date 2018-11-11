@@ -76,14 +76,23 @@ public class RefuseChallenge extends AbstractController {
 				if(fetch.getChallenger()==(long)request.getSession(true).getAttribute("id")) {
 					fetch.setStatus(ChallengeStatus.withdrawn.ordinal());
 					request.setAttribute("message", "You withdrew the challenge!");
+					fetch.update();
+					display.remove(Integer.parseInt(request.getParameter("challenge")));
+					request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
+				}else if(fetch.getChallengee()!=(long)request.getSession(true).getAttribute("id")) {
+					request.setAttribute("message", "That challenge wasn't for you.");
+					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 				}else {
 				fetch.setStatus(ChallengeStatus.refused.ordinal());
 					request.setAttribute("message", "You refused the challenge!");
+					fetch.update();
+					display.remove(Integer.parseInt(request.getParameter("challenge")));
+					request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				}
-				fetch.update();
-				display.remove(Integer.parseInt(request.getParameter("challenge")));
 				
-				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
+				
+				
+				
 				
 			}else{
 
