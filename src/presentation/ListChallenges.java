@@ -29,7 +29,7 @@ public class ListChallenges extends AbstractController {
 		try{
 			
 			if(checkIfLoggedIn(request)){
-				ArrayList<ChallengeRDG> rdgchallenge = ChallengeRDG.findAllOpen();
+				ArrayList<ChallengeRDG> rdgchallenge = ChallengeRDG.findAll();
 				ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
 							
 				for(ChallengeRDG rdg : rdgchallenge)
@@ -43,8 +43,8 @@ public class ListChallenges extends AbstractController {
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			}
 		}catch(Exception e){
-			
-			request.setAttribute("message", "You are not logged in.");
+			e.printStackTrace();
+			request.setAttribute("message", "Caught and exception");
 			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			
 		}finally{

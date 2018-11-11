@@ -217,4 +217,26 @@ public class ChallengeRDG {
 		
 	}
 	
+public static ArrayList<ChallengeRDG> findAll() throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM challenge;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<ChallengeRDG> challengeList = new ArrayList<ChallengeRDG>();
+		ChallengeRDG challenge = null;
+		while(rs.next()){
+			challenge = new ChallengeRDG(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+			challengeList.add(challenge);
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return challengeList;
+		
+	}
+	
 }

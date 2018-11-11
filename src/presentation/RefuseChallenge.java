@@ -73,7 +73,7 @@ public class RefuseChallenge extends AbstractController {
 //				out.println(Integer.parseInt(request.getParameter("challenges")));
 //				out.close();
 //				
-				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenges")));
+				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenge")));
 				
 				fetch.setStatus(ChallengeStatus.refused.ordinal());
 				fetch.update();

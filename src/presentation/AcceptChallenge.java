@@ -71,11 +71,11 @@ public class AcceptChallenge extends AbstractController {
 //				out.println(Integer.parseInt(request.getParameter("challenges")));
 //				out.close();
 //				
-				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenges")));
+				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenge")));
 				
 				fetch.setStatus(ChallengeStatus.accepted.ordinal());
 				fetch.update();
-				display.remove(Integer.parseInt(request.getParameter("challenges")));
+				display.remove(Integer.parseInt(request.getParameter("challenge")));
 				request.setAttribute("message", "You accepted the challenge!");
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				
