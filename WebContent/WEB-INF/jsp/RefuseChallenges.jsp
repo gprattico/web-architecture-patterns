@@ -15,8 +15,8 @@
 <form method="post">
 	<label> Select one </label>
 	<select name="challenges">
-		<c:forEach items="${challenges}" var="choice" varStatus="loop">
-			<option value="${choice.key}">${choice.value}</option>
+		<c:forEach items="${challenges}" var="display" varStatus="loop">
+			<option value="${display.key}">${display.value}</option>
 		</c:forEach>
 	</select>
 	<br><br><br>
