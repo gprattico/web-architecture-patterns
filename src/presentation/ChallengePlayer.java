@@ -35,9 +35,10 @@ public class ChallengePlayer extends AbstractController {
 				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
 							
 				for(UserRDG rdg : rdgUsers){
-					if(rdg.getId()!=(long)request.getSession().getAttribute("id"))
+					//if(rdg.getId()!=(long)request.getSession().getAttribute("id"))
 					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
 				}
+				//check if they have a deck
 				if(DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"))==null){
 					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 					
@@ -62,7 +63,7 @@ public class ChallengePlayer extends AbstractController {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
 		try{
-			if(checkIfLoggedIn(request)&&hasDeck(request)){
+			if(checkIfLoggedIn(request)&&hasDeck(request)&&(Integer.parseInt(request.getParameter("player"))!=(long)request.getSession(true).getAttribute("id"))){
 				
 				ChallengeHelper helper = new ChallengeHelper(ChallengeRDG.getMaxChallengeID(),
 				(long)request.getSession().getAttribute("id"), Integer.parseInt(request.getParameter("player")),0 );
@@ -74,7 +75,7 @@ public class ChallengePlayer extends AbstractController {
 				request.setAttribute("message", "You have just challenged user #"+helper.getChallengee());
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 			}else{
-				request.setAttribute("message", "Challenge failed");
+				request.setAttribute("message", "Challenge failed. You either don't have a deck, aren't logged in or tried challenging yourself!");
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			}
 		
