@@ -79,6 +79,9 @@ public class AcceptChallenge extends AbstractController {
 				
 				fetch.setStatus(ChallengeStatus.accepted.ordinal());
 				fetch.update();
+				
+				
+				
 				display.remove(Integer.parseInt(request.getParameter("challenge")));
 				request.setAttribute("message", "You accepted the challenge!");
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
