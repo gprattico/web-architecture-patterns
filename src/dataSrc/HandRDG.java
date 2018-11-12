@@ -95,4 +95,24 @@ public class HandRDG {
 		return count;
 		
 	}
+
+	public static HandRDG findByUserId(long ID) throws SQLException {
+
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM hand WHERE userID = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, ID);
+		ResultSet rs = ps.executeQuery();
+		HandRDG hand = null;
+		if (rs.next()) {
+			hand = new HandRDG(rs.getLong("id"), rs.getLong("gameID"), rs.getLong("userID"));
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return hand;
+		
+	}
 }

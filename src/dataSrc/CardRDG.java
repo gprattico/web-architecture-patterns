@@ -174,6 +174,28 @@ public class CardRDG {
 		return count;
 		
 	}
+
+	public static ArrayList<CardRDG> findAllBenched(long deckID) throws SQLException {
+
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM card WHERE deck = ? AND status = 3;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, deckID);
+		ResultSet rs = ps.executeQuery();
+		
+		//temp user
+		ArrayList<CardRDG> cardList = new ArrayList<CardRDG>(); 
+		while (rs.next()) {
+			cardList.add(new CardRDG(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return cardList;
+		
+	}
 	
 
 }
