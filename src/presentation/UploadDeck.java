@@ -102,7 +102,7 @@ public class UploadDeck extends AbstractController {
 						rdg.insert();
 						CardRDG card=null;
 							for(String i : deckArray){
-							card = new CardRDG(CardRDG.getMaxCardID(),deckID,i.substring(0, 1),i.substring(2));
+							card = new CardRDG(CardRDG.getMaxCardID(),deckID,i.substring(0, 1),i.substring(2),0);//0 because in deck
 							card.insert();
 							}
 							request.setAttribute("message", "You now have a deck!");
