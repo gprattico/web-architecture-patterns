@@ -16,7 +16,7 @@
 			},
 			"${game.challengeeID}": {
 				"status": "playing",
-				"handsize": ${challengerHandList},
+				"handsize": ${challengeeHandList},
 				"decksize": ${deckSize2},
 				"discardsize": ${discardSize2},
 				"bench": [<c:forEach items="${benchedListChallengee}" var="card" varStatus="loop">${card.id}<c:if test="${!loop.last}">,</c:if></c:forEach>]
