@@ -108,4 +108,42 @@ public class GameRDG {
 	public long getId() {
 		return id;
 	}
+
+	public static GameRDG find(long attribute) throws SQLException {
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM game WHERE challengerID=? OR challengeeID=?;";
+		
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, attribute);
+		ps.setLong(2, attribute);
+		ResultSet rs = ps.executeQuery();
+		
+		GameRDG game =null;
+		if(rs.next()) {
+			game = new GameRDG(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getLong(4));
+		}
+		
+		ps.close();
+		rs.close();
+		
+		return game;
+	}
+
+	public int delete() throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "DELETE FROM game WHERE id=?;";
+		
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, id);
+		
+		int count = ps.executeUpdate();
+		
+		ps.close();
+		
+		return count;
+	}
 }

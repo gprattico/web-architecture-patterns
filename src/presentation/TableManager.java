@@ -57,6 +57,10 @@ public class TableManager extends AbstractController {
 			ps =  con.prepareStatement(query5);
 			rs = ps.executeUpdate();
 			
+			String query7="truncate table game;";
+			ps = con.prepareStatement(query7);
+			rs = ps.executeUpdate();
+			
 			String query6 = "SET FOREIGN_KEY_CHECKS = 1;"; 
 			ps = con.prepareStatement(query6);
 			rs = ps.executeUpdate();
