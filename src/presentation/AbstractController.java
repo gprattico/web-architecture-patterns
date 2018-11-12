@@ -13,6 +13,7 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
 import dataSrc.DeckRDG;
+import dataSrc.GameRDG;
 
 /*
  * Useful when extended, child servlet calls this init and loads the db. StartDb() and CloseDB(), as well as some other
@@ -102,6 +103,22 @@ public class AbstractController extends HttpServlet {
 			return false;
 		}
 		
+		
+	}
+	
+	protected boolean IsInGame(HttpServletRequest request) {
+		
+		try {
+			GameRDG rdg = GameRDG.find((long)request.getSession(true).getAttribute("id"));
+			if(rdg == null)
+				return false;
+			else
+				return true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 	}
 	

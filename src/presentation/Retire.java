@@ -25,7 +25,7 @@ public class Retire extends AbstractController {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
-			if(checkIfLoggedIn(request)) {
+			if(checkIfLoggedIn(request) && IsInGame(request)) {
 				
 			GameRDG rdg = GameRDG.find((long)request.getSession(true).getAttribute("id")); //returns a game where i was either challenger or challengee
 			rdg.delete();
@@ -37,7 +37,8 @@ public class Retire extends AbstractController {
 			
 			}else {
 				//not logged in
-				
+				request.setAttribute("message", "You are not in a game.");
+				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
