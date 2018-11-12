@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import dataSrc.CardRDG;
 import dataSrc.ChallengeRDG;
 import dataSrc.DeckRDG;
+import dataSrc.GameRDG;
 import domain.ChallengeStatus;
 
 //controller used to test
@@ -30,7 +31,7 @@ public class testController extends AbstractController {
 			
 			PrintWriter out = response.getWriter();
 			
-			CardRDG card1 = new CardRDG(CardRDG.getMaxCardID(),2,"energy","a lot");
+			GameRDG card1 = new GameRDG(GameRDG.getMaxGameID(),1,2,0);
 			card1.insert();
 		
 			out.close();

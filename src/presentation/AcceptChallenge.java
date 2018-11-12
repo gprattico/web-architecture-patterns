@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.ChallengeRDG;
+import dataSrc.GameRDG;
 import dataSrc.UserRDG;
 import domain.ChallengeHelper;
 import domain.ChallengeStatus;
@@ -83,18 +84,23 @@ public class AcceptChallenge extends AbstractController {
 				
 				
 				display.remove(Integer.parseInt(request.getParameter("challenge")));
+				
+				//Create Game
+				GameRDG game = new GameRDG(GameRDG.getMaxGameID(),fetch.getChallenger(),fetch.getChallengee(),0);
+				game.insert();
+				
 				request.setAttribute("message", "You accepted the challenge!");
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				}
 			}else{
 
-				request.setAttribute("message", "Something went wrong");
+				request.setAttribute("message", "not logged in.");
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 				
 			}
 		}catch(Exception e){
-
-			request.setAttribute("message", "Something went wrong");
+			e.printStackTrace();
+			request.setAttribute("message", "exception caught");
 			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 		}finally{
 			closeDb();
