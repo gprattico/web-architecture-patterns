@@ -16,6 +16,7 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 /**
  * When we access this path, we truncate the tables.
  * Removes foreign keys.
+ * The SET_FOREIGN_KEYS to truncate the tables is taken from stack overflow
  */
 @WebServlet("/TableManager")
 public class TableManager extends AbstractController {

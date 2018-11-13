@@ -14,6 +14,7 @@ import dataSrc.DeckRDG;
 
 /**
  * Servlet implementation class UploadDeck
+ * UploadDeck replace function: https://stackoverflow.com/questions/19316394/removing-double-quotes-from-a-string-in-java
  */
 @WebServlet("/UploadDeck")
 public class UploadDeck extends AbstractController {
@@ -70,7 +71,7 @@ public class UploadDeck extends AbstractController {
 						request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 					}
 					//check if exactly 40
-					String deckArray[] = deckString.replace("\r", "").trim().split("\n");
+					String deckArray[] = deckString.trim().split("\n");
 					if(deckArray.length!=40){
 						request.setAttribute("message", "Please enter 40 cards. You have entered "+deckArray.length);
 						request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
