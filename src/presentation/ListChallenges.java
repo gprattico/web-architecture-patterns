@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.ChallengeRDG;
-import dataSrc.UserRDG;
 import domain.ChallengeHelper;
-import domain.UserHelper;
 
 /**
  * Servlet implementation class ListChallenges

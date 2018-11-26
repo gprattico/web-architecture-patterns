@@ -1,11 +1,8 @@
 package presentation;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.ChallengeRDG;
 import dataSrc.GameRDG;
-import dataSrc.UserRDG;
 import domain.ChallengeHelper;
 import domain.ChallengeStatus;
 

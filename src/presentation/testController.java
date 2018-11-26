@@ -10,11 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.CardRDG;
-import dataSrc.ChallengeRDG;
-import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
-import domain.ChallengeStatus;
 
 //controller used to test
 

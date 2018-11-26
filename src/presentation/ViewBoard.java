@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import dataSrc.CardRDG;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
-import dataSrc.HandRDG;
 
 @WebServlet("/ViewBoard")
 public class ViewBoard extends AbstractController {
