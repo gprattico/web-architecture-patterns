@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
 import dataSrc.HandRDG;
-import dataSrc.card.CardFinder;
-import dataSrc.card.CardTDG;
-import domain.Card;
+import domain.card.Card;
+import domain.card.CardInputMapper;
+import domain.card.CardOutputMapper;
 
 @WebServlet("/DrawCard")
 public class DrawCard extends AbstractController {
@@ -35,7 +35,7 @@ public class DrawCard extends AbstractController {
 				
 				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id"));
 				DeckRDG deck = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
-				ArrayList<Card> cardList = CardFinder.findAll(deck.getId());
+				ArrayList<Card> cardList = CardInputMapper.findAll(deck.getId());
 				//get all the cards
 				//set the first card that isnt a 0 to status 1
 				//insert that card into the handRDG
@@ -48,7 +48,7 @@ public class DrawCard extends AbstractController {
 						hand.insert();
 						cardIterator.setStatus(1);
 						//cardIterator.update();
-						CardTDG.update(cardIterator.getId(),cardIterator.getDeck(),cardIterator.getType(),cardIterator.getName(),cardIterator.getStatus());
+						CardOutputMapper.update(cardIterator);
 						cardDrawn =true;
 						break;
 					}

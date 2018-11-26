@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.ChallengeRDG;
+import dataSrc.challenge.ChallengeRDG;
 import domain.ChallengeHelper;
 
 /**

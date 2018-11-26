@@ -16,30 +16,6 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
  */
 public class CardTDG {
 	
-	//included because we do not use auto increment in our relational db
-	public static long maxCardID=0;
-	
-	
-	public static synchronized long getMaxCardID() throws SQLException{
-		
-		//need the if 0 or else can't insert more than one at a time
-		if (maxCardID == 0) {
-			Connection con = DbRegistry.getDbConnection();
-			String query = "Select MAX(id) as id FROM card;";
-			
-			PreparedStatement ps = con.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
-			
-			if(rs.next())
-				maxCardID = rs.getLong("id");
-			
-			ps.close();
-			rs.close();
-		}
-		
-		return ++maxCardID;
-	}
-	
 	public static int insert(long id, long deck, String type, String name, int status) throws SQLException {
 		
 		Connection con = DbRegistry.getDbConnection();

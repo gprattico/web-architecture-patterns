@@ -15,7 +15,7 @@ import dataSrc.GameRDG;
 import dataSrc.UserRDG;
 import dataSrc.card.CardFinder;
 import dataSrc.card.CardTDG;
-import domain.Card;
+import domain.card.Card;
 
 //controller used to test
 

@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
 import dataSrc.card.CardFinder;
-import domain.Card;
+import domain.card.Card;
+import domain.card.CardInputMapper;
 
 @WebServlet("/ViewBoard")
 public class ViewBoard extends AbstractController {
@@ -34,15 +35,15 @@ public class ViewBoard extends AbstractController {
 				DeckRDG challengeeDeck = DeckRDG.findByUserID(game.getChallengeeID());
 				
 				//arraylist of cards in hand
-				ArrayList<Card> challengerHandList = CardFinder.findAllInHand(DeckRDG.findByUserID(game.getChallengerID()).getId());
-				ArrayList<Card> challengeeHandList = CardFinder.findAllInHand(DeckRDG.findByUserID(game.getChallengeeID()).getId());
+				ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckRDG.findByUserID(game.getChallengerID()).getId());
+				ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckRDG.findByUserID(game.getChallengeeID()).getId());
 				
 				//arrayList of all cards attributed to them
-				ArrayList<Card> challengerDeckList = CardFinder.findAll(challengerDeck.getId());
-				ArrayList<Card> challengeeDeckList = CardFinder.findAll(challengeeDeck.getId());
+				ArrayList<Card> challengerDeckList = CardInputMapper.findAll(challengerDeck.getId());
+				ArrayList<Card> challengeeDeckList = CardInputMapper.findAll(challengeeDeck.getId());
 				
-				ArrayList<Card> benchedListChallenger = CardFinder.findAllBenched(DeckRDG.findByUserID(game.getChallengerID()).getId());
-				ArrayList<Card> benchedListChallengee = CardFinder.findAllBenched(DeckRDG.findByUserID(game.getChallengeeID()).getId());
+				ArrayList<Card> benchedListChallenger = CardInputMapper.findAllBenched(DeckRDG.findByUserID(game.getChallengerID()).getId());
+				ArrayList<Card> benchedListChallengee = CardInputMapper.findAllBenched(DeckRDG.findByUserID(game.getChallengeeID()).getId());
 				//deck size is number of cards status =0
 				int deckSize1=0;
 				int deckSize2=0;
