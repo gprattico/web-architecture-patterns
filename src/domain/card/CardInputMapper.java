@@ -1,12 +1,7 @@
 package domain.card;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
 import dataSrc.card.CardFinder;
 
