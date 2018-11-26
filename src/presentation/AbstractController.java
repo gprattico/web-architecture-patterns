@@ -121,5 +121,10 @@ public class AbstractController extends HttpServlet {
 		}
 		
 	}
+	
+	protected long CurrentSession(HttpServletRequest request) {
+		
+		return (long)request.getSession(true).getAttribute("id");
+	}
 
 }

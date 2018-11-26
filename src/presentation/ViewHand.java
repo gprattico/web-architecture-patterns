@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataSrc.CardFinder;
 import dataSrc.CardRDG;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
 import dataSrc.HandRDG;
+import domain.Card;
 
 /**
  * Servlet implementation class ViewHand
@@ -31,12 +33,12 @@ public class ViewHand extends AbstractController {
 				
 				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id")); //get the game id
 				DeckRDG deck = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id")); //get the deck id
-				ArrayList<CardRDG> cardList = CardRDG.findAllInHand(deck.getId()); //get all the cards in my hand
+				ArrayList<Card> cardList = CardFinder.findAllInHand(deck.getId()); //get all the cards in my hand
 
 				//edit Card table to have cardStatus. 0 in deck, 1 in hand, 2 on bench, 3 discard pile
 				//edit hand rdg, simply remove headCardID
 				ArrayList<HandRDG> handList = new ArrayList<HandRDG>();
-				for(CardRDG cardIterator:cardList) {
+				for(Card cardIterator:cardList) {
 					handList.add(new HandRDG(cardIterator.getId(),game.getId(),(long)request.getSession(true).getAttribute("id")));
 				}
 				

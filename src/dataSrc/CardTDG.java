@@ -41,7 +41,7 @@ public class CardTDG {
 	}
 	
 
-	public int insert(long id, long deck, String type, String name, int status) throws SQLException {
+	public static int insert(long id, long deck, String type, String name, int status) throws SQLException {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
@@ -59,7 +59,7 @@ public class CardTDG {
 		return count;
 	}
 	
-	public int update(long id, long deck, String type, String name, int status) throws SQLException {
+	public static int update(long id, long deck, String type, String name, int status) throws SQLException {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
@@ -79,7 +79,7 @@ public class CardTDG {
 		
 	}
 	
-	public int delete(long id) throws SQLException {
+	public static int delete(long id) throws SQLException {
 		
 		Connection con = DbRegistry.getDbConnection();
 		String query = "DELETE FROM card WHERE id =?;";

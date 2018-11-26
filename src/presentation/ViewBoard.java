@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import dataSrc.CardFinder;
 import dataSrc.CardRDG;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
+import domain.Card;
 
 @WebServlet("/ViewBoard")
 public class ViewBoard extends AbstractController {
@@ -33,15 +36,15 @@ public class ViewBoard extends AbstractController {
 				DeckRDG challengeeDeck = DeckRDG.findByUserID(game.getChallengeeID());
 				
 				//arraylist of cards in hand
-				ArrayList<CardRDG> challengerHandList = CardRDG.findAllInHand(DeckRDG.findByUserID(game.getChallengerID()).getId());
-				ArrayList<CardRDG> challengeeHandList = CardRDG.findAllInHand(DeckRDG.findByUserID(game.getChallengeeID()).getId());
+				ArrayList<Card> challengerHandList = CardFinder.findAllInHand(DeckRDG.findByUserID(game.getChallengerID()).getId());
+				ArrayList<Card> challengeeHandList = CardFinder.findAllInHand(DeckRDG.findByUserID(game.getChallengeeID()).getId());
 				
 				//arrayList of all cards attributed to them
-				ArrayList<CardRDG> challengerDeckList = CardRDG.findAll(challengerDeck.getId());
-				ArrayList<CardRDG> challengeeDeckList = CardRDG.findAll(challengeeDeck.getId());
+				ArrayList<Card> challengerDeckList = CardFinder.findAll(challengerDeck.getId());
+				ArrayList<Card> challengeeDeckList = CardFinder.findAll(challengeeDeck.getId());
 				
-				ArrayList<CardRDG> benchedListChallenger = CardRDG.findAllBenched(DeckRDG.findByUserID(game.getChallengerID()).getId());
-				ArrayList<CardRDG> benchedListChallengee = CardRDG.findAllBenched(DeckRDG.findByUserID(game.getChallengeeID()).getId());
+				ArrayList<Card> benchedListChallenger = CardFinder.findAllBenched(DeckRDG.findByUserID(game.getChallengerID()).getId());
+				ArrayList<Card> benchedListChallengee = CardFinder.findAllBenched(DeckRDG.findByUserID(game.getChallengeeID()).getId());
 				//deck size is number of cards status =0
 				int deckSize1=0;
 				int deckSize2=0;
@@ -50,7 +53,7 @@ public class ViewBoard extends AbstractController {
 				int benchSize1=0;
 				int benchSize2=0;
 				
-				for(CardRDG cardIterator:challengerDeckList) {
+				for(Card cardIterator:challengerDeckList) {
 					if(cardIterator.getStatus()==0) {
 						deckSize1++;						
 					}else if(cardIterator.getStatus()==2) {
@@ -59,7 +62,7 @@ public class ViewBoard extends AbstractController {
 						benchSize1++;
 					}						
 				}
-				for(CardRDG cardIterator:challengeeDeckList) {
+				for(Card cardIterator:challengeeDeckList) {
 					if(cardIterator.getStatus()==0) {
 						deckSize2++;						
 					}else if(cardIterator.getStatus()==2) {

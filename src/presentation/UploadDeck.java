@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.CardRDG;
+import dataSrc.CardTDG;
 import dataSrc.DeckRDG;
+import domain.Card;
 
 /**
  * Servlet implementation class UploadDeck
@@ -98,10 +100,11 @@ public class UploadDeck extends AbstractController {
 						Long deckID = DeckRDG.getMaxDeckID();
 						DeckRDG rdg = new DeckRDG(deckID,(long)request.getSession(true).getAttribute("id"));
 						rdg.insert();
-						CardRDG card=null;
+						//CardRDG card=null;
+						Card card =null;
 							for(String i : deckArray){
-							card = new CardRDG(CardRDG.getMaxCardID(),deckID,i.substring(0, 1),i.substring(2),0);//0 because in deck
-							card.insert();
+							card = new Card(CardTDG.getMaxCardID(),deckID,i.substring(0, 1),i.substring(2),0);//0 because in deck
+							CardTDG.insert(card.getId(),card.getDeck(),card.getType(),card.getName(),card.getStatus());
 							}
 							request.setAttribute("message", "You now have a deck!");
 							request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);	

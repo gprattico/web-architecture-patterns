@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataSrc.CardFinder;
 import dataSrc.CardRDG;
+import dataSrc.CardTDG;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
 import dataSrc.HandRDG;
+import domain.Card;
 
 @WebServlet("/DrawCard")
 public class DrawCard extends AbstractController {
@@ -33,19 +36,20 @@ public class DrawCard extends AbstractController {
 				
 				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id"));
 				DeckRDG deck = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
-				ArrayList<CardRDG> cardList = CardRDG.findAll(deck.getId());
+				ArrayList<Card> cardList = CardFinder.findAll(deck.getId());
 				//get all the cards
 				//set the first card that isnt a 0 to status 1
 				//insert that card into the handRDG
 				HandRDG hand = null;
 				Boolean cardDrawn = false;
-				for(CardRDG cardIterator:cardList) {
+				for(Card cardIterator:cardList) {
 					//if its 0,  make it a 1
 					if(cardIterator.getStatus()==0) {
 						hand = new HandRDG(cardIterator.getId(),game.getId(),(long)request.getSession(true).getAttribute("id"));
 						hand.insert();
 						cardIterator.setStatus(1);
-						cardIterator.update();
+						//cardIterator.update();
+						CardTDG.update(cardIterator.getId(),cardIterator.getDeck(),cardIterator.getType(),cardIterator.getName(),cardIterator.getStatus());
 						cardDrawn =true;
 						break;
 					}

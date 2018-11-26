@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataSrc.CardFinder;
 import dataSrc.CardRDG;
 import dataSrc.DeckRDG;
+import domain.Card;
 
 /**
  * Servlet implementation class ViewDeck
@@ -37,8 +39,8 @@ public class ViewDeck extends AbstractController {
 				
 				//find all cards associated with this deck
 				long deckID = rdg.getId();
-				ArrayList<CardRDG> cardList = new ArrayList<CardRDG>();
-				cardList = CardRDG.findAll(deckID);
+				ArrayList<Card> cardList = new ArrayList<Card>();
+				cardList = CardFinder.findAll(deckID);
 				
 				
 				
