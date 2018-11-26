@@ -8,12 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.CardFinder;
-import dataSrc.CardRDG;
-import dataSrc.CardTDG;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
 import dataSrc.HandRDG;
+import dataSrc.card.CardFinder;
+import dataSrc.card.CardTDG;
 import domain.Card;
 
 @WebServlet("/DrawCard")

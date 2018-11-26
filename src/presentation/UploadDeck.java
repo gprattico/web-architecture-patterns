@@ -1,14 +1,14 @@
 package presentation;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.CardRDG;
-import dataSrc.CardTDG;
 import dataSrc.DeckRDG;
+import dataSrc.card.CardTDG;
 import domain.Card;
 
 /**

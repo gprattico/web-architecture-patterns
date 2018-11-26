@@ -10,11 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.CardFinder;
-import dataSrc.CardTDG;
 import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
 import dataSrc.UserRDG;
+import dataSrc.card.CardFinder;
+import dataSrc.card.CardTDG;
 import domain.Card;
 
 //controller used to test
