@@ -40,7 +40,6 @@ public class CardTDG {
 		return ++maxCardID;
 	}
 	
-
 	public static int insert(long id, long deck, String type, String name, int status) throws SQLException {
 		
 		Connection con = DbRegistry.getDbConnection();

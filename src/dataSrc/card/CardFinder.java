@@ -65,7 +65,7 @@ public class CardFinder {
 		ps.setLong(1, deckID);
 		ResultSet rs = ps.executeQuery();
 		
-		//temp user
+		
 		ArrayList<Card> cardList = new ArrayList<Card>(); 
 		while (rs.next()) {
 			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
