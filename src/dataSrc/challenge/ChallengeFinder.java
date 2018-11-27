@@ -32,6 +32,7 @@ public class ChallengeFinder {
 		return ++maxChallengeID;
 	}
 	
+	
 //	public static Challenge find(long id) throws SQLException{
 //		
 //		Connection con = DbRegistry.getDbConnection();
