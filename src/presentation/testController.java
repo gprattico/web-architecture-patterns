@@ -10,10 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.card.CardFinder;
-import dataSrc.card.CardTDG;
-import domain.card.Card;
-
 //controller used to test
 
 @WebServlet("/test")
