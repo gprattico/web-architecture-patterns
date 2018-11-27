@@ -8,14 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.HandRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 import domain.card.CardOutputMapper;
 import domain.deck.Deck;
 import domain.deck.DeckInputMapper;
-import domain.game.Game;
-import domain.game.GameInputMapper;
 
 @WebServlet("/DrawCard")
 public class DrawCard extends AbstractController {
@@ -35,23 +32,23 @@ public class DrawCard extends AbstractController {
 		try{//add check if deck size is grater than 0 (cards still remaining to draw)
 			if(checkIfLoggedIn(request)&&hasDeck(request)){
 				
-				Game game = GameInputMapper.find((long)request.getSession(true).getAttribute("id"));
+				//Game game = GameInputMapper.find((long)request.getSession(true).getAttribute("id"));
 				Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"));
 				ArrayList<Card> cardList = CardInputMapper.findAll(deck.getId());
 				//get all the cards
 				//set the first card that isnt a 0 to status 1
 				//insert that card into the handRDG
-				HandRDG hand = null;
-				Boolean cardDrawn = false;
+				//HandRDG hand = null;
+				//Boolean cardDrawn = false;
 				for(Card cardIterator:cardList) {
 					//if its 0,  make it a 1
 					if(cardIterator.getStatus()==0) {
-						hand = new HandRDG(cardIterator.getId(),game.getId(),(long)request.getSession(true).getAttribute("id"));
-						hand.insert();
+//						hand = new HandRDG(cardIterator.getId(),game.getId(),(long)request.getSession(true).getAttribute("id"));
+//						hand.insert();
 						cardIterator.setStatus(1);
 						//cardIterator.update();
 						CardOutputMapper.update(cardIterator);
-						cardDrawn =true;
+						//cardDrawn =true;
 						break;
 					}
 				}
