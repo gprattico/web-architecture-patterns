@@ -8,9 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
+import domain.deck.Deck;
+import domain.deck.DeckInputMapper;
 
 /**
  * Servlet implementation class ViewDeck
@@ -28,16 +29,16 @@ public class ViewDeck extends AbstractController {
 		try{
 			if(checkIfLoggedIn(request)){
 				long userID = (long)request.getSession(true).getAttribute("id");
-				DeckRDG rdg = DeckRDG.findByUserID(userID);
+				Deck deck = DeckInputMapper.findByUserID(userID);
 				
 				//check if deck null
-				if(rdg == null){
+				if(deck == null){
 					request.setAttribute("message", "You don't have a deck.");
 					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 				}else {
 				
 				//find all cards associated with this deck
-				long deckID = rdg.getId();
+				long deckID = deck.getId();
 				ArrayList<Card> cardList = new ArrayList<Card>();
 				cardList = CardInputMapper.findAll(deckID);
 				

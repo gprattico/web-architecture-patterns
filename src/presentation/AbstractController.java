@@ -2,6 +2,7 @@ package presentation;
 
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,8 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
 import dataSrc.GameRDG;
-import dataSrc.deck.DeckRDG;
+import domain.deck.Deck;
+import domain.deck.DeckInputMapper;
 
 /*
  * Useful when extended, child servlet calls this init and loads the db. StartDb() and CloseDB(), as well as some other
@@ -92,8 +94,8 @@ public class AbstractController extends HttpServlet {
 	protected boolean hasDeck(HttpServletRequest request) {
 		
 		try {
-			DeckRDG rdg = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
-			if(rdg == null)
+			Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"));
+			if(deck == null)
 				return false;
 			else
 				return true;

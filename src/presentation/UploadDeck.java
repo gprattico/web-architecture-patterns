@@ -7,10 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 import domain.card.CardOutputMapper;
+import domain.deck.Deck;
+import domain.deck.DeckInputMapper;
+import domain.deck.DeckOutputMapper;
 
 /**
  * Servlet implementation class UploadDeck
@@ -29,7 +31,7 @@ public class UploadDeck extends AbstractController {
 		try{
 			if(checkIfLoggedIn(request)){
 				
-				DeckRDG deck = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
+				Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"));
 							
 				
 				if(deck ==null){
@@ -62,8 +64,8 @@ public class UploadDeck extends AbstractController {
 			
 			if(checkIfLoggedIn(request)){
 				
-				DeckRDG deckRdg = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
-				if(deckRdg ==null){
+				Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"));
+				if(deck ==null){
 					String deckString = request.getParameter("deck");
 					//check if empty
 					if(deckString.equals("") || deckString ==null){
@@ -98,9 +100,10 @@ public class UploadDeck extends AbstractController {
 						
 						
 						//insert
-						Long deckID = DeckRDG.getMaxDeckID();
-						DeckRDG rdg = new DeckRDG(deckID,(long)request.getSession(true).getAttribute("id"));
-						rdg.insert();
+						Long deckID = DeckInputMapper.getMaxDeckID();
+						Deck newDeck = new Deck(deckID,(long)request.getSession(true).getAttribute("id"));
+						DeckOutputMapper.insert(newDeck);
+						//rdg.insert();
 						//CardRDG card=null;
 						Card card =null;
 							for(String i : deckArray){

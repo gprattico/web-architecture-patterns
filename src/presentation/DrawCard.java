@@ -14,6 +14,8 @@ import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 import domain.card.CardOutputMapper;
+import domain.deck.Deck;
+import domain.deck.DeckInputMapper;
 
 @WebServlet("/DrawCard")
 public class DrawCard extends AbstractController {
@@ -34,7 +36,7 @@ public class DrawCard extends AbstractController {
 			if(checkIfLoggedIn(request)&&hasDeck(request)){
 				
 				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id"));
-				DeckRDG deck = DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"));
+				Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"));
 				ArrayList<Card> cardList = CardInputMapper.findAll(deck.getId());
 				//get all the cards
 				//set the first card that isnt a 0 to status 1

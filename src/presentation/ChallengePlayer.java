@@ -8,10 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.deck.DeckRDG;
 import domain.challenge.Challenge;
 import domain.challenge.ChallengeInputMapper;
 import domain.challenge.ChallengeOutputMapper;
+import domain.deck.DeckInputMapper;
 import domain.user.User;
 import domain.user.UserInputMapper;
 
@@ -39,7 +39,7 @@ public class ChallengePlayer extends AbstractController {
 //					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
 //				}
 				//check if they have a deck
-				if(DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"))==null){
+				if(DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"))==null){
 					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 					
 				}else {

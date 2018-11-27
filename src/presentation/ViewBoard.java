@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.GameRDG;
-import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
+import domain.deck.Deck;
+import domain.deck.DeckInputMapper;
 
 @WebServlet("/ViewBoard")
 public class ViewBoard extends AbstractController {
@@ -30,19 +31,19 @@ public class ViewBoard extends AbstractController {
 				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id"));
 				
 				//deck ids
-				DeckRDG challengerDeck = DeckRDG.findByUserID(game.getChallengerID());
-				DeckRDG challengeeDeck = DeckRDG.findByUserID(game.getChallengeeID());
+				Deck challengerDeck = DeckInputMapper.findByUserID(game.getChallengerID());
+				Deck challengeeDeck = DeckInputMapper.findByUserID(game.getChallengeeID());
 				
 				//arraylist of cards in hand
-				ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckRDG.findByUserID(game.getChallengerID()).getId());
-				ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckRDG.findByUserID(game.getChallengeeID()).getId());
+				ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckInputMapper.findByUserID(game.getChallengerID()).getId());
+				ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckInputMapper.findByUserID(game.getChallengeeID()).getId());
 				
 				//arrayList of all cards attributed to them
 				ArrayList<Card> challengerDeckList = CardInputMapper.findAll(challengerDeck.getId());
 				ArrayList<Card> challengeeDeckList = CardInputMapper.findAll(challengeeDeck.getId());
 				
-				ArrayList<Card> benchedListChallenger = CardInputMapper.findAllBenched(DeckRDG.findByUserID(game.getChallengerID()).getId());
-				ArrayList<Card> benchedListChallengee = CardInputMapper.findAllBenched(DeckRDG.findByUserID(game.getChallengeeID()).getId());
+				ArrayList<Card> benchedListChallenger = CardInputMapper.findAllBenched(DeckInputMapper.findByUserID(game.getChallengerID()).getId());
+				ArrayList<Card> benchedListChallengee = CardInputMapper.findAllBenched(DeckInputMapper.findByUserID(game.getChallengeeID()).getId());
 				//deck size is number of cards status =0
 				int deckSize1=0;
 				int deckSize2=0;
