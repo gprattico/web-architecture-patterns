@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.GameRDG;
+import dataSrc.game.GameRDG;
 import domain.challenge.Challenge;
 import domain.challenge.ChallengeInputMapper;
 import domain.challenge.ChallengeOutputMapper;

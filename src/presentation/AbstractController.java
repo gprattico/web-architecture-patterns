@@ -13,7 +13,7 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
-import dataSrc.GameRDG;
+import dataSrc.game.GameRDG;
 import domain.deck.Deck;
 import domain.deck.DeckInputMapper;
 

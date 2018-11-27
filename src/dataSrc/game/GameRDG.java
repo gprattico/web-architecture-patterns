@@ -1,4 +1,4 @@
-package dataSrc;
+package dataSrc.game;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
