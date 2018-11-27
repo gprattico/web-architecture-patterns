@@ -3,8 +3,6 @@ package domain.deck;
 import java.sql.SQLException;
 
 import dataSrc.deck.DeckTDG;
-import dataSrc.user.UserTDG;
-import domain.user.User;
 
 public class DeckOutputMapper {
 

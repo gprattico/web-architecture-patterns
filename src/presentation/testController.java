@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.card.CardFinder;
 import dataSrc.card.CardTDG;
-import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 
 //controller used to test

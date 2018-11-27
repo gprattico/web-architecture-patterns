@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.GameRDG;
 import dataSrc.HandRDG;
-import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 import domain.card.CardOutputMapper;
