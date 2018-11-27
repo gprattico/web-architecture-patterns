@@ -8,9 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
 import dataSrc.HandRDG;
+import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 

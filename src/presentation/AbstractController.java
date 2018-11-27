@@ -12,8 +12,8 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
-import dataSrc.DeckRDG;
 import dataSrc.GameRDG;
+import dataSrc.deck.DeckRDG;
 
 /*
  * Useful when extended, child servlet calls this init and loads the db. StartDb() and CloseDB(), as well as some other

@@ -10,9 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.DeckRDG;
 import dataSrc.card.CardFinder;
 import dataSrc.card.CardTDG;
+import dataSrc.deck.DeckRDG;
 import domain.card.Card;
 
 //controller used to test
@@ -32,19 +32,19 @@ public class testController extends AbstractController {
 			
 //			GameRDG card1 = new GameRDG(GameRDG.getMaxGameID(),1,2,0);
 //			card1.insert();
-		
-			UserRDG user = new UserRDG(1,1,"john","hoehoe");
-			user.insert();
-			DeckRDG deck = new DeckRDG(1, 1);
-			deck.insert();
-			
-			CardTDG tdg = new CardTDG();
-			tdg.insert(1, 1, "pokemon", "charizard", 0);
-			
-			Card card = CardFinder.findAll(1).get(0);
-			
-			out.println(card.getName());
-			
+//		
+//			UserRDG user = new UserRDG(1,1,"john","hoehoe");
+//			user.insert();
+//			DeckRDG deck = new DeckRDG(1, 1);
+//			deck.insert();
+//			
+//			CardTDG tdg = new CardTDG();
+//			tdg.insert(1, 1, "pokemon", "charizard", 0);
+//			
+//			Card card = CardFinder.findAll(1).get(0);
+//			
+//			out.println(card.getName());
+//			
 			
 			out.close();
 		}
