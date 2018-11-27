@@ -4,11 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
-
-import domain.card.Card;
 
 public class CardFinder {
 	

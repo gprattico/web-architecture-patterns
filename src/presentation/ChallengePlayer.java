@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.DeckRDG;
 import dataSrc.challenge.ChallengeRDG;
-import dataSrc.user.UserFinder;
-import domain.ChallengeHelper;
-import domain.UserHelper;
+import domain.challenge.ChallengeHelper;
 import domain.user.User;
 import domain.user.UserInputMapper;
 

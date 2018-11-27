@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.challenge.ChallengeRDG;
-import domain.ChallengeHelper;
-import domain.ChallengeStatus;
+import domain.challenge.ChallengeHelper;
+import domain.challenge.ChallengeStatus;
 
 /**
  * Servlet implementation class RefuseChallenge

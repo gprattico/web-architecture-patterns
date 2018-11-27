@@ -1,4 +1,4 @@
-package domain;
+package domain.challenge;
 
 //to be used for db status column
 //ChallengeStatus.open.ordinal() returns 0

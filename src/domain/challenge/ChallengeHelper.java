@@ -1,4 +1,4 @@
-package domain;
+package domain.challenge;
 
 import java.sql.SQLException;
 
