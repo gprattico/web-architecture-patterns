@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.DeckRDG;
 import dataSrc.challenge.ChallengeRDG;
+import dataSrc.user.UserFinder;
 import dataSrc.user.UserRDG;
 import domain.ChallengeHelper;
 import domain.UserHelper;
+import domain.user.User;
+import domain.user.UserInputMapper;
 
 /**
  * Servlet implementation class ChallengePlayer
@@ -30,20 +33,20 @@ public class ChallengePlayer extends AbstractController {
 		try{
 			
 			if(checkIfLoggedIn(request)){
-				ArrayList<UserRDG> rdgUsers = UserRDG.findAll();
-				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
-							
-				for(UserRDG rdg : rdgUsers){
-					//if(rdg.getId()!=(long)request.getSession().getAttribute("id"))
-					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
-				}
+				ArrayList<User> Users = UserInputMapper.findAll();
+//				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
+//							
+//				for(User userIterator : Users){
+//					//if(rdg.getId()!=(long)request.getSession().getAttribute("id"))
+//					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
+//				}
 				//check if they have a deck
 				if(DeckRDG.findByUserID((long)request.getSession(true).getAttribute("id"))==null){
 					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 					
 				}else {
 					
-					request.setAttribute("player", user);
+					request.setAttribute("player", Users);
 					request.getRequestDispatcher("WEB-INF/jsp/ChallengePlayer.jsp").forward(request, response);
 				}
 			}else{

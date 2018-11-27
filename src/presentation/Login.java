@@ -1,12 +1,14 @@
 package presentation;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.user.UserRDG;
+import domain.user.User;
+import domain.user.UserInputMapper;
 
 /**
  * Servlet implementation class Login
@@ -34,9 +36,9 @@ public class Login extends AbstractController {
 		}
 		else{
 			
-			UserRDG user = UserRDG.find(username, password);
+			//UserRDG user = UserRDG.find(username, password);
 			
-				user = UserRDG.find(username);
+				User user = UserInputMapper.find(username);
 				
 				if(user ==null){
 					request.setAttribute("message", "That username or password is incorrect.");

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.user.UserRDG;
+import domain.user.User;
+import domain.user.UserInputMapper;
+import domain.user.UserOutputMapper;
 
 /**
  * Servlet implementation class Register
@@ -38,18 +41,17 @@ public class Register extends AbstractController {
 		}
 		else{
 			//check if user already exists, if not create new user
-			UserRDG user;
-			
-				user = UserRDG.find(username);
+
+			User user = UserInputMapper.find(username);
 				
 				if(user !=null){
 					request.setAttribute("message", "That username has been taken.");
 					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 
 				} else {
-					user = new UserRDG(UserRDG.getMaxID(),1,username,password);
+					user = new User(UserInputMapper.getMaxID(),1,username,password);
 					
-					user.insert();
+					UserOutputMapper.insert(user);
 					long id = user.getId();
 					
 					request.getSession(true).setAttribute("id", id);

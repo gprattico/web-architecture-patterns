@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.user.UserRDG;
 import domain.UserHelper;
+import domain.user.User;
+import domain.user.UserInputMapper;
 
 /**
  * Servlet implementation class ListPlayers
@@ -25,13 +27,13 @@ public class ListPlayers extends AbstractController {
 		try{
 			
 			if(checkIfLoggedIn(request)){
-				ArrayList<UserRDG> rdgUsers = UserRDG.findAll();
-				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
-							
-				for(UserRDG rdg : rdgUsers)
-					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
+				ArrayList<User> users = UserInputMapper.findAll();
+//				ArrayList<UserHelper> user = new ArrayList<UserHelper>();
+//							
+//				for(UserRDG rdg : rdgUsers)
+//					user.add(new UserHelper(rdg.getId(),rdg.getVersion(),rdg.getUsername(),rdg.getPassword()));
 				
-					request.setAttribute("players", user);
+					request.setAttribute("players", users);
 					request.getRequestDispatcher("WEB-INF/jsp/ListPlayers.jsp").forward(request, response);
 				
 			}else{

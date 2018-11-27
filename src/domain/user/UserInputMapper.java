@@ -8,6 +8,11 @@ import dataSrc.user.UserFinder;
 
 public class UserInputMapper {
 	
+	public static long getMaxID() throws SQLException {
+	
+		return UserFinder.getMaxID();
+	}
+	
 	public static User find(long id) throws SQLException {
 		
 		ResultSet rs = UserFinder.find(id);
