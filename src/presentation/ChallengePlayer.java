@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.DeckRDG;
-import dataSrc.UserRDG;
 import dataSrc.challenge.ChallengeRDG;
+import dataSrc.user.UserRDG;
 import domain.ChallengeHelper;
 import domain.UserHelper;
 

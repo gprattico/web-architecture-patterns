@@ -2,7 +2,7 @@ package domain;
 
 import java.sql.SQLException;
 
-import dataSrc.UserRDG;
+import dataSrc.user.UserRDG;
 
 public class ChallengeHelper {
 
