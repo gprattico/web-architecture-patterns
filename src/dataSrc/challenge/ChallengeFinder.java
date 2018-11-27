@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
@@ -33,15 +34,15 @@ public class ChallengeFinder {
 	}
 	
 	
-//	public static Challenge find(long id) throws SQLException{
-//		
-//		Connection con = DbRegistry.getDbConnection();
-//		
-//		String query = "SELECT id, challenger, challengee, status FROM challenge WHERE id = ?;";
-//		PreparedStatement ps = con.prepareStatement(query);
-//		ps.setLong(1, id);
-//		ResultSet rs = ps.executeQuery();
-//		
+	public static ResultSet find(long id) throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT id, challenger, challengee, status FROM challenge WHERE id = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, id);
+		ResultSet rs = ps.executeQuery();
+		
 //		//temp user
 //		ChallengeRDG challenge = null;
 //		if (rs.next()) {
@@ -50,9 +51,100 @@ public class ChallengeFinder {
 //		
 //		rs.close();
 //		ps.close();
+		
+		return rs;
+	}
+	
+	public static ResultSet findOpenByChallenger(long challenger) throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT id, challenger, challengee, status FROM challenge WHERE challenger = ? AND status = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, challenger);
+		ps.setInt(2, 0);//only concerned with open challenges
+		ResultSet rs = ps.executeQuery();
+		
+//		ArrayList<ChallengeRDG> challengeList = new ArrayList<ChallengeRDG>();
+//		ChallengeRDG challenge = null;
+//		while (rs.next()) {
+//			challenge = new ChallengeRDG(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+//			challengeList.add(challenge);
+//		}
 //		
-//		return challenge;
-//	}
+//		rs.close();
+//		ps.close();
+		
+		return rs;
+	}
+	
+	public static ResultSet findOpenByChallengee(long challengee) throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT id, challenger, challengee, status FROM challenge WHERE challengee = ? AND status = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, challengee);
+		ps.setInt(2, 0);//open challenges
+		ResultSet rs = ps.executeQuery();
+//		
+//		ArrayList<ChallengeRDG> challengeList = new ArrayList<ChallengeRDG>();
+//		ChallengeRDG challenge = null;
+//		while (rs.next()) {
+//			challenge = new ChallengeRDG(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+//			challengeList.add(challenge);
+//		}
+//		
+//		rs.close();
+//		ps.close();
+		
+		return rs;
+	}
+	
+	public static ResultSet findAllOpen() throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM challenge WHERE status = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setInt(1, 0);//open challenges only
+		ResultSet rs = ps.executeQuery();
+		
+//		ArrayList<ChallengeRDG> challengeList = new ArrayList<ChallengeRDG>();
+//		ChallengeRDG challenge = null;
+//		while(rs.next()){
+//			challenge = new ChallengeRDG(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+//			challengeList.add(challenge);
+//		}
+//		
+//		rs.close();
+//		ps.close();
+//		
+		return rs;
+		
+	}
+	
+	public static ResultSet findAll() throws SQLException{
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM challenge;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		
+//		ArrayList<ChallengeRDG> challengeList = new ArrayList<ChallengeRDG>();
+//		ChallengeRDG challenge = null;
+//		while(rs.next()){
+//			challenge = new ChallengeRDG(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+//			challengeList.add(challenge);
+//		}
+//		
+//		rs.close();
+//		ps.close();
+		
+		return rs;
+		
+	}
 	
 	
 

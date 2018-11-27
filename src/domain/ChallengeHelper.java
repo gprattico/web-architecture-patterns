@@ -2,7 +2,10 @@ package domain;
 
 import java.sql.SQLException;
 
-import dataSrc.user.UserRDG;
+import domain.user.User;
+import domain.user.UserInputMapper;
+
+
 
 public class ChallengeHelper {
 
@@ -48,10 +51,10 @@ public class ChallengeHelper {
 	}
 	//returns the username of the challenger in this challenge
 	public String findChallengerUsername() throws SQLException{
-		UserRDG rdg = UserRDG.find(challenger);
+		User user = UserInputMapper.find(challenger);
 		
 		String temp="";
-		temp = rdg.getUsername();	
+		temp = user.getUsername();	
 		
 		return temp;
 	}
