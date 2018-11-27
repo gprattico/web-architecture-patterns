@@ -1,5 +1,6 @@
 package domain.card;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -9,19 +10,46 @@ public class CardInputMapper {
 
 	public static ArrayList<Card> findAll(long id) throws SQLException{
 		
-		return CardFinder.findAll(id);
+		ResultSet rs = CardFinder.findAll(id);
+		
+		ArrayList<Card> cardList = new ArrayList<Card>(); 
+		while (rs.next()) {
+			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+		}
+		
+		rs.close();
+		
+		return cardList;
 		
 	}
 	
 	public static ArrayList<Card> findAllInHand(long id) throws SQLException {
 		
-		return CardFinder.findAllInHand(id);
+		ResultSet rs = CardFinder.findAllInHand(id);
+		
+		ArrayList<Card> cardList = new ArrayList<Card>(); 
+		while (rs.next()) {
+			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+		}
+		
+		rs.close();
+		
+		return cardList;
 	}
 	
 	public static ArrayList<Card> findAllBenched(long id) throws SQLException{
 		
+		ResultSet rs = CardFinder.findAllBenched(id);
 		
-		return CardFinder.findAllBenched(id);
+		ArrayList<Card> cardList = new ArrayList<Card>(); 
+		while (rs.next()) {
+			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+		}
+		
+		rs.close();
+		
+		return cardList;
+		
 	}
 	
 	public static long getMaxCardID() throws SQLException {

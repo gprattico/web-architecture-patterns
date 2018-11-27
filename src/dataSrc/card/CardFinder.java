@@ -38,7 +38,7 @@ public class CardFinder {
 	
 	
 	
-	public static ArrayList<Card> findAll(long Deckid) throws SQLException{
+	public static ResultSet findAll(long Deckid) throws SQLException{
 		
 		Connection con = DbRegistry.getDbConnection();
 		
@@ -47,20 +47,20 @@ public class CardFinder {
 		ps.setLong(1, Deckid);
 		ResultSet rs = ps.executeQuery();
 		
-		//temp user
-		ArrayList<Card> cardList = new ArrayList<Card>(); 
-		while (rs.next()) {
-			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
-		}
+//		//temp user
+//		ArrayList<Card> cardList = new ArrayList<Card>(); 
+//		while (rs.next()) {
+//			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+//		}
+//		
+//		rs.close();
+		//ps.close();
 		
-		rs.close();
-		ps.close();
-		
-		return cardList;
+		return rs;
 	}
 	
 	
-	public static ArrayList<Card> findAllInHand(long deckID) throws SQLException {
+	public static ResultSet findAllInHand(long deckID) throws SQLException {
 
 		Connection con = DbRegistry.getDbConnection();
 		
@@ -69,19 +69,19 @@ public class CardFinder {
 		ps.setLong(1, deckID);
 		ResultSet rs = ps.executeQuery();
 		
-		//temp user
-		ArrayList<Card> cardList = new ArrayList<Card>(); 
-		while (rs.next()) {
-			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
-		}
+//		//temp user
+//		ArrayList<Card> cardList = new ArrayList<Card>(); 
+//		while (rs.next()) {
+//			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+//		}
+//		
+//		rs.close();
+		//ps.close();
 		
-		rs.close();
-		ps.close();
-		
-		return cardList;
+		return rs;
 	}
 	
-	public static ArrayList<Card> findAllBenched(long deckID) throws SQLException {
+	public static ResultSet findAllBenched(long deckID) throws SQLException {
 
 		Connection con = DbRegistry.getDbConnection();
 		
@@ -91,16 +91,15 @@ public class CardFinder {
 		ResultSet rs = ps.executeQuery();
 		
 		
-		ArrayList<Card> cardList = new ArrayList<Card>(); 
-		while (rs.next()) {
-			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
-		}
+//		ArrayList<Card> cardList = new ArrayList<Card>(); 
+//		while (rs.next()) {
+//			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+//		}
+//		
+//		rs.close();
+		//ps.close();
 		
-		rs.close();
-		ps.close();
-		
-		return cardList;
-		
+		return rs;		
 	}
 
 }
