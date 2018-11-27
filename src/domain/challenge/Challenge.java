@@ -1,5 +1,10 @@
 package domain.challenge;
 
+import java.sql.SQLException;
+
+import domain.user.User;
+import domain.user.UserInputMapper;
+
 public class Challenge {
 	
 	long id;
@@ -42,5 +47,15 @@ public class Challenge {
 	public long getId() {
 		return id;
 	}
+	
+	//returns the username of the challenger in this challenge
+		public String findChallengerUsername() throws SQLException{
+			User user = UserInputMapper.find(challenger);
+			
+			String temp="";
+			temp = user.getUsername();	
+			
+			return temp;
+		}
 	
 }

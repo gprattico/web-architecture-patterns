@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.DeckRDG;
-import dataSrc.challenge.ChallengeRDG;
-import domain.challenge.ChallengeHelper;
+import domain.challenge.Challenge;
+import domain.challenge.ChallengeInputMapper;
+import domain.challenge.ChallengeOutputMapper;
 import domain.user.User;
 import domain.user.UserInputMapper;
 
@@ -64,13 +65,14 @@ public class ChallengePlayer extends AbstractController {
 		try{
 			if(checkIfLoggedIn(request)&&hasDeck(request)&&(Integer.parseInt(request.getParameter("player"))!=(long)request.getSession(true).getAttribute("id"))){
 				
-				ChallengeHelper helper = new ChallengeHelper(ChallengeRDG.getMaxChallengeID(),
+				Challenge helper = new Challenge(ChallengeInputMapper.getMaxChallengeID(),
 				(long)request.getSession().getAttribute("id"), Integer.parseInt(request.getParameter("player")),0 );
 				
-				ChallengeRDG rdg = new ChallengeRDG(helper.getId(),helper.getChallenger(),helper.getChallengee(),
-						helper.getStatus());
+//				Challenge rdg = new Challenge(helper.getId(),helper.getChallenger(),helper.getChallengee(),
+//						helper.getStatus());
 				
-				rdg.insert();
+				ChallengeOutputMapper.insert(helper);
+				//rdg.insert();
 				request.setAttribute("message", "You have just challenged user #"+helper.getChallengee());
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 			}else{

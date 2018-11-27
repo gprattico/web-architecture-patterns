@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.GameRDG;
-import dataSrc.challenge.ChallengeRDG;
-import domain.challenge.ChallengeHelper;
+import domain.challenge.Challenge;
+import domain.challenge.ChallengeInputMapper;
+import domain.challenge.ChallengeOutputMapper;
 import domain.challenge.ChallengeStatus;
 
 @WebServlet("/AcceptChallenge")
@@ -26,16 +27,16 @@ public class AcceptChallenge extends AbstractController {
 		try{
 			
 			if(checkIfLoggedIn(request)){
-				ArrayList<ChallengeRDG> rdgchallenge = ChallengeRDG.findAllOpen();
-				ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
+				ArrayList<Challenge> challenge = ChallengeInputMapper.findAllOpen();
+				//ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
 				
-				for(ChallengeRDG rdg : rdgchallenge){
-					if(rdg.getStatus()==0){
-						challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
-					}
-				}
+//				for(ChallengeRDG rdg : rdgchallenge){
+//					if(rdg.getStatus()==0){
+//						challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
+//					}
+//				}
 				
-				for(ChallengeHelper helper : challenge){
+				for(Challenge helper : challenge){
 					display.put((int)helper.getId(), helper.findChallengerUsername());
 					
 				}
@@ -67,7 +68,7 @@ public class AcceptChallenge extends AbstractController {
 //				out.println(Integer.parseInt(request.getParameter("challenges")));
 //				out.close();
 //				
-				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenge")));
+				Challenge fetch = ChallengeInputMapper.find(Integer.parseInt(request.getParameter("challenge")));
 				
 				if(fetch.getChallengee()!=(long)request.getSession(true).getAttribute("id")) {
 					request.setAttribute("message", "You cannot accept a challenge not intended for you");
@@ -75,7 +76,9 @@ public class AcceptChallenge extends AbstractController {
 				}else {
 				
 				fetch.setStatus(ChallengeStatus.accepted.ordinal());
-				fetch.update();
+				
+				ChallengeOutputMapper.update(fetch);
+				//fetch.update();
 				
 				
 				

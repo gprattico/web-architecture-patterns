@@ -9,8 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.challenge.ChallengeRDG;
-import domain.challenge.ChallengeHelper;
+import domain.challenge.Challenge;
+import domain.challenge.ChallengeInputMapper;
+import domain.challenge.ChallengeOutputMapper;
 import domain.challenge.ChallengeStatus;
 
 /**
@@ -30,16 +31,16 @@ public class RefuseChallenge extends AbstractController {
 		try{
 			
 			if(checkIfLoggedIn(request)){
-				ArrayList<ChallengeRDG> rdgchallenge = ChallengeRDG.findAllOpen();
-				ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
+				ArrayList<Challenge> challenge = ChallengeInputMapper.findAllOpen();
+				//ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
 				
-				for(ChallengeRDG rdg : rdgchallenge){
-					if(rdg.getStatus()==0){
-						challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
-					}
-				}
+//				for(ChallengeRDG rdg : rdgchallenge){
+//					if(rdg.getStatus()==0){
+//						challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
+//					}
+//				}
 				
-				for(ChallengeHelper helper : challenge){
+				for(Challenge helper : challenge){
 					display.put((int)helper.getId(), helper.findChallengerUsername());
 					
 				}
@@ -72,11 +73,12 @@ public class RefuseChallenge extends AbstractController {
 //				out.println(Integer.parseInt(request.getParameter("challenges")));
 //				out.close();
 //				
-				ChallengeRDG fetch = ChallengeRDG.find(Integer.parseInt(request.getParameter("challenge")));
+				Challenge fetch = ChallengeInputMapper.find(Integer.parseInt(request.getParameter("challenge")));
 				if(fetch.getChallenger()==(long)request.getSession(true).getAttribute("id")) {
 					fetch.setStatus(ChallengeStatus.withdrawn.ordinal());
 					request.setAttribute("message", "You withdrew the challenge!");
-					fetch.update();
+					//fetch.update();
+					ChallengeOutputMapper.update(fetch);
 					display.remove(Integer.parseInt(request.getParameter("challenge")));
 					request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				}else if(fetch.getChallengee()!=(long)request.getSession(true).getAttribute("id")) {
@@ -85,7 +87,8 @@ public class RefuseChallenge extends AbstractController {
 				}else {
 				fetch.setStatus(ChallengeStatus.refused.ordinal());
 					request.setAttribute("message", "You refused the challenge!");
-					fetch.update();
+					ChallengeOutputMapper.update(fetch);
+					//fetch.update();
 					display.remove(Integer.parseInt(request.getParameter("challenge")));
 					request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				}
