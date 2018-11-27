@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.HandRDG;
-import dataSrc.game.GameRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 import domain.deck.Deck;
 import domain.deck.DeckInputMapper;
+import domain.game.Game;
+import domain.game.GameInputMapper;
 
 /**
  * Servlet implementation class ViewHand
@@ -31,7 +32,7 @@ public class ViewHand extends AbstractController {
 		try {
 			if(checkIfLoggedIn(request)&&hasDeck(request)) {
 				
-				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id")); //get the game id
+				Game game = GameInputMapper.find((long)request.getSession(true).getAttribute("id")); //get the game id
 				Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id")); //get the deck id
 				ArrayList<Card> cardList = CardInputMapper.findAllInHand(deck.getId()); //get all the cards in my hand
 

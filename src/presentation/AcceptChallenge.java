@@ -3,16 +3,19 @@ package presentation;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.game.GameRDG;
 import domain.challenge.Challenge;
 import domain.challenge.ChallengeInputMapper;
 import domain.challenge.ChallengeOutputMapper;
 import domain.challenge.ChallengeStatus;
+import domain.game.Game;
+import domain.game.GameInputMapper;
+import domain.game.GameOutputMapper;
 
 @WebServlet("/AcceptChallenge")
 public class AcceptChallenge extends AbstractController {
@@ -85,8 +88,10 @@ public class AcceptChallenge extends AbstractController {
 				display.remove(Integer.parseInt(request.getParameter("challenge")));
 				
 				//Create Game
-				GameRDG game = new GameRDG(GameRDG.getMaxGameID(),fetch.getChallenger(),fetch.getChallengee(),0);
-				game.insert();
+				Game game = new Game(GameInputMapper.getMaxGameID(),fetch.getChallenger(),fetch.getChallengee(),0);
+				
+				GameOutputMapper.insert(game);
+				//game.insert();
 				
 				request.setAttribute("message", "You accepted the challenge!");
 				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);

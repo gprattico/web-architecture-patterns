@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.game.GameRDG;
-import domain.GameHelper;
+import domain.game.Game;
+import domain.game.GameInputMapper;
 
 /**
  * Servlet implementation class ListGames
@@ -31,13 +31,13 @@ public class ListGames extends AbstractController {
 		try{
 			
 			if(checkIfLoggedIn(request)){
-				ArrayList<GameRDG> gameList = GameRDG.findAll();
-				ArrayList<GameHelper> helperList = new ArrayList<GameHelper>();
+				ArrayList<Game> gameList = GameInputMapper.findAll();
+				//ArrayList<GameHelper> helperList = new ArrayList<GameHelper>();
 							
-				for(GameRDG rdg : gameList)
-					helperList.add(new GameHelper(rdg.getId(),rdg.getChallengerID(),rdg.getChallengeeID(),rdg.getStatus()));
+//				for(Game rdg : gameList)
+//					helperList.add(new GameHelper(rdg.getId(),rdg.getChallengerID(),rdg.getChallengeeID(),rdg.getStatus()));
 				
-					request.setAttribute("challenge", helperList);
+					request.setAttribute("challenge", gameList);
 					request.getRequestDispatcher("WEB-INF/jsp/ListGames.jsp").forward(request, response);
 				
 			}else{

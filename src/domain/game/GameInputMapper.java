@@ -8,6 +8,12 @@ import dataSrc.game.GameFinder;
 
 public class GameInputMapper {
 	
+	
+	public static long getMaxGameID() throws SQLException {
+		
+		return GameFinder.getMaxGameID();
+	}
+	
 	public static ArrayList<Game> findAll() throws SQLException{
 		
 		ResultSet rs = GameFinder.findAll();

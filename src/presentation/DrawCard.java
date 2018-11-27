@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataSrc.HandRDG;
-import dataSrc.game.GameRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 import domain.card.CardOutputMapper;
 import domain.deck.Deck;
 import domain.deck.DeckInputMapper;
+import domain.game.Game;
+import domain.game.GameInputMapper;
 
 @WebServlet("/DrawCard")
 public class DrawCard extends AbstractController {
@@ -34,7 +35,7 @@ public class DrawCard extends AbstractController {
 		try{//add check if deck size is grater than 0 (cards still remaining to draw)
 			if(checkIfLoggedIn(request)&&hasDeck(request)){
 				
-				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id"));
+				Game game = GameInputMapper.find((long)request.getSession(true).getAttribute("id"));
 				Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"));
 				ArrayList<Card> cardList = CardInputMapper.findAll(deck.getId());
 				//get all the cards

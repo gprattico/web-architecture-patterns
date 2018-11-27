@@ -13,9 +13,10 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
-import dataSrc.game.GameRDG;
 import domain.deck.Deck;
 import domain.deck.DeckInputMapper;
+import domain.game.Game;
+import domain.game.GameInputMapper;
 
 /*
  * Useful when extended, child servlet calls this init and loads the db. StartDb() and CloseDB(), as well as some other
@@ -111,8 +112,8 @@ public class AbstractController extends HttpServlet {
 	protected boolean IsInGame(HttpServletRequest request) {
 		
 		try {
-			GameRDG rdg = GameRDG.find((long)request.getSession(true).getAttribute("id"));
-			if(rdg == null)
+			Game game = GameInputMapper.find((long)request.getSession(true).getAttribute("id"));
+			if(game == null)
 				return false;
 			else
 				return true;

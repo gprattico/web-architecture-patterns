@@ -1,12 +1,15 @@
 package presentation;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.game.GameRDG;
+import domain.game.Game;
+import domain.game.GameInputMapper;
+import domain.game.GameOutputMapper;
 
 @WebServlet("/Retire")
 public class Retire extends AbstractController {
@@ -26,8 +29,10 @@ public class Retire extends AbstractController {
 			
 			if(checkIfLoggedIn(request) && IsInGame(request)) {
 				
-			GameRDG rdg = GameRDG.find((long)request.getSession(true).getAttribute("id")); //returns a game where i was either challenger or challengee
-			rdg.delete();
+			Game game = GameInputMapper.find((long)request.getSession(true).getAttribute("id")); //returns a game where i was either challenger or challengee
+			GameOutputMapper.delete(game);
+			
+			//rdg.delete();
 			
 			//find the challenge associated with this game and delete it
 			//ChallengeRDG challengeRDG = ChallengeRDG.findByInProgress((long)request.getSession(true).getAttribute("id"));

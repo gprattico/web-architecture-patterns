@@ -8,11 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataSrc.game.GameRDG;
 import domain.card.Card;
 import domain.card.CardInputMapper;
 import domain.deck.Deck;
 import domain.deck.DeckInputMapper;
+import domain.game.Game;
+import domain.game.GameInputMapper;
 
 @WebServlet("/ViewBoard")
 public class ViewBoard extends AbstractController {
@@ -28,7 +29,7 @@ public class ViewBoard extends AbstractController {
 			if(checkIfLoggedIn(request)&&IsInGame(request)) {
 				
 				//game
-				GameRDG game = GameRDG.find((long)request.getSession(true).getAttribute("id"));
+				Game game = GameInputMapper.find((long)request.getSession(true).getAttribute("id"));
 				
 				//deck ids
 				Deck challengerDeck = DeckInputMapper.findByUserID(game.getChallengerID());
