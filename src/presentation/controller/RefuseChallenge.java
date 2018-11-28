@@ -1,4 +1,4 @@
-package presentation;
+package presentation.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,20 +13,21 @@ import domain.challenge.Challenge;
 import domain.challenge.ChallengeInputMapper;
 import domain.challenge.ChallengeOutputMapper;
 import domain.challenge.ChallengeStatus;
-import domain.game.Game;
-import domain.game.GameInputMapper;
-import domain.game.GameOutputMapper;
 
-@WebServlet("/AcceptChallenge")
-public class AcceptChallenge extends AbstractController {
+/**
+ * Servlet implementation class RefuseChallenge
+ */
+@WebServlet("/RefuseChallenge")
+public class RefuseChallenge extends AbstractController {
 	private static final long serialVersionUID = 1L;
 	HashMap <Integer,String> display = new HashMap <Integer,String>();
 
-	public AcceptChallenge() {
+    public RefuseChallenge() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		try{
 			
 			if(checkIfLoggedIn(request)){
@@ -45,7 +46,7 @@ public class AcceptChallenge extends AbstractController {
 				}
 				
 					request.setAttribute("challenge", display);
-					request.getRequestDispatcher("WEB-INF/jsp/AcceptChallenges.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/jsp/RefuseChallenges.jsp").forward(request, response);
 			}else{
 				request.setAttribute("message", "You are not logged in.");
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
@@ -59,10 +60,11 @@ public class AcceptChallenge extends AbstractController {
 		}finally{
 			closeDb();
 		}
-		
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		try{
 			if(checkIfLoggedIn(request)){
 //				
@@ -72,44 +74,42 @@ public class AcceptChallenge extends AbstractController {
 //				out.close();
 //				
 				Challenge fetch = ChallengeInputMapper.find(Integer.parseInt(request.getParameter("challenge")));
-				
-				if(fetch.getChallengee()!=(long)request.getSession(true).getAttribute("id")) {
-					request.setAttribute("message", "You cannot accept a challenge not intended for you");
+				if(fetch.getChallenger()==(long)request.getSession(true).getAttribute("id")) {
+					fetch.setStatus(ChallengeStatus.withdrawn.ordinal());
+					request.setAttribute("message", "You withdrew the challenge!");
+					//fetch.update();
+					ChallengeOutputMapper.update(fetch);
+					display.remove(Integer.parseInt(request.getParameter("challenge")));
+					request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
+				}else if(fetch.getChallengee()!=(long)request.getSession(true).getAttribute("id")) {
+					request.setAttribute("message", "That challenge wasn't for you.");
 					request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 				}else {
-				
-				fetch.setStatus(ChallengeStatus.accepted.ordinal());
-				
-				ChallengeOutputMapper.update(fetch);
-				//fetch.update();
-				
-				
-				
-				display.remove(Integer.parseInt(request.getParameter("challenge")));
-				
-				//Create Game
-				Game game = new Game(GameInputMapper.getMaxGameID(),fetch.getChallenger(),fetch.getChallengee(),0);
-				
-				GameOutputMapper.insert(game);
-				//game.insert();
-				
-				request.setAttribute("message", "You accepted the challenge!");
-				request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
+				fetch.setStatus(ChallengeStatus.refused.ordinal());
+					request.setAttribute("message", "You refused the challenge!");
+					ChallengeOutputMapper.update(fetch);
+					//fetch.update();
+					display.remove(Integer.parseInt(request.getParameter("challenge")));
+					request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
 				}
+				
+				
+				
+				
+				
 			}else{
 
-				request.setAttribute("message", "not logged in.");
+				request.setAttribute("message", "Something went wrong");
 				request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 				
 			}
 		}catch(Exception e){
-			e.printStackTrace();
-			request.setAttribute("message", "exception caught");
+
+			request.setAttribute("message", "Something went wrong");
 			request.getRequestDispatcher("WEB-INF/jsp/Failure.jsp").forward(request, response);
 		}finally{
 			closeDb();
 		}
-		
 	}
 
 }

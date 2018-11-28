@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
+import presentation.controller.AbstractController;
+
 /**
  * When we access this path, we truncate the tables.
  * Removes foreign keys.

@@ -37,6 +37,10 @@ public class FrontController extends SmartDispatcherServlet {
 	@Override
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
 		
+		//https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServletRequest.html#getServletPath()
+		//cannot use /* with this or else returns blank string
+		String URL = request.getServletPath();
+		
 		
 		
 	}
