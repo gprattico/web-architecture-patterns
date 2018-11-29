@@ -1,22 +1,20 @@
 package presentation;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.application.servlet.Servlet;
-import org.dsrg.soenea.application.servlet.impl.SmartDispatcherServlet;
 import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
 import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.LoginDispatcher;
+import presentation.dispatcher.RegisterDispatcher;
 
 /**
  * Servlet implementation class FrontController
@@ -44,25 +42,21 @@ public class FrontController extends Servlet {
 		
 		//https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServletRequest.html#getServletPath()
 		//cannot use /* with this or else returns blank string
-		PrintWriter out = response.getWriter();
-		out.println("in process request");
-		
+		try {
 		String URL = request.getServletPath();
 		
 		AbstractDispatcher dispatcher = getDispatcher(request, response, URL);
-		out.println(dispatcher);
-		//out.println(dispatcher.toString());
-		
-		//dispatcher.init(request, response);
+
 		if(request.getMethod().equals("GET")) {
 			dispatcher.doGet();
 		}else {
 			dispatcher.execute();
 		}
-		
-		
-		//dispatcher.execute();
-		
+		}catch(Exception e) {
+			//no URL
+			request.setAttribute("message","The URL you provided does not exist");
+			request.getRequestDispatcher("/WEB-INF/jsp/Failure.jsp").forward(request, response);
+		}
 	}
 
     public static synchronized void startDb() {
@@ -102,7 +96,9 @@ public class FrontController extends Servlet {
     	AbstractDispatcher dispatcher = null;
     	
     	if(URL.equals("/Poke/Player/Register")) {
-    		dispatcher = new LoginDispatcher(request, response);
+    		dispatcher = new RegisterDispatcher(request, response);
+    	} else if(URL.equals("/Poke/Player/Login")) {
+    		dispatcher = new LoginDispatcher(request,response);
     	}
     	
     	return dispatcher;

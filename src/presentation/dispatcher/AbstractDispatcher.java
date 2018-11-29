@@ -15,6 +15,8 @@ import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
  */
 public abstract class AbstractDispatcher extends Dispatcher{
 
+	public abstract void doGet() throws IOException, ServletException;
+	
 	@Override
 	public abstract void execute() throws ServletException, IOException;
 
@@ -37,8 +39,5 @@ public abstract class AbstractDispatcher extends Dispatcher{
 		return (long)request.getSession(true).getAttribute("id");
 	}
 
-	public void doGet() throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
