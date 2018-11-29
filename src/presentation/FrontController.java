@@ -1,6 +1,8 @@
 package presentation;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +23,7 @@ import presentation.dispatcher.LoginDispatcher;
  * Uses SOENEA
  * Extends servlet class, inheriting the processRequest method
  */
-@WebServlet("/FrontController")
+@WebServlet("/")
 public class FrontController extends Servlet {
 
 	private static final long serialVersionUID = 1L;
@@ -42,12 +44,24 @@ public class FrontController extends Servlet {
 		
 		//https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServletRequest.html#getServletPath()
 		//cannot use /* with this or else returns blank string
+		PrintWriter out = response.getWriter();
+		out.println("in process request");
+		
 		String URL = request.getServletPath();
 		
-		AbstractDispatcher dispatcher = this.getDispatcher(URL);
+		AbstractDispatcher dispatcher = getDispatcher(request, response, URL);
+		out.println(dispatcher);
+		//out.println(dispatcher.toString());
 		
-		dispatcher.init(request, response);
-		dispatcher.execute();
+		//dispatcher.init(request, response);
+		if(request.getMethod().equals("GET")) {
+			dispatcher.doGet();
+		}else {
+			dispatcher.execute();
+		}
+		
+		
+		//dispatcher.execute();
 		
 	}
 
@@ -83,12 +97,12 @@ public class FrontController extends Servlet {
     	ThreadLocalTracker.purgeThreadLocal();
     }
     
-    public AbstractDispatcher getDispatcher(String URL) {
+    public AbstractDispatcher getDispatcher(HttpServletRequest request, HttpServletResponse response, String URL) {
     	
     	AbstractDispatcher dispatcher = null;
     	
     	if(URL.equals("/Poke/Player/Register")) {
-    		dispatcher = new LoginDispatcher();
+    		dispatcher = new LoginDispatcher(request, response);
     	}
     	
     	return dispatcher;

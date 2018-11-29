@@ -36,4 +36,9 @@ public abstract class AbstractDispatcher extends Dispatcher{
 		
 		return (long)request.getSession(true).getAttribute("id");
 	}
+
+	public void doGet() throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		
+	}
 }
