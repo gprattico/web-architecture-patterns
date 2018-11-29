@@ -13,13 +13,16 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
+import presentation.dispatcher.AbstractDispatcher;
+import presentation.dispatcher.LoginDispatcher;
+
 /**
  * Servlet implementation class FrontController
  * Uses SOENEA
  * Extends servlet class, inheriting the processRequest method
  */
 @WebServlet("/FrontController")
-public class FrontController extends SmartDispatcherServlet {
+public class FrontController extends Servlet {
 
 	private static final long serialVersionUID = 1L;
        
@@ -41,40 +44,13 @@ public class FrontController extends SmartDispatcherServlet {
 		//cannot use /* with this or else returns blank string
 		String URL = request.getServletPath();
 		
+		AbstractDispatcher dispatcher = this.getDispatcher(URL);
 		
+		dispatcher.init(request, response);
+		dispatcher.execute();
 		
 	}
 
-	@Override
-	protected String getXMLErrorTemplate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getJSONErrorTemplate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getErrorTemplate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getMessageTemplate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getMainTemplate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
     public static synchronized void startDb() {
     	
     	try {
@@ -105,6 +81,18 @@ public class FrontController extends SmartDispatcherServlet {
     	}
     	
     	ThreadLocalTracker.purgeThreadLocal();
+    }
+    
+    public AbstractDispatcher getDispatcher(String URL) {
+    	
+    	AbstractDispatcher dispatcher = null;
+    	
+    	if(URL.equals("/Poke/Player/Register")) {
+    		dispatcher = new LoginDispatcher();
+    	}
+    	
+    	return dispatcher;
+    	
     }
 
 }
