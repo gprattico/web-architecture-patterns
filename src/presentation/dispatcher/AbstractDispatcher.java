@@ -17,8 +17,6 @@ import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
  *
  */
 public abstract class AbstractDispatcher extends Dispatcher{
-
-	public abstract void handleGet() throws IOException, ServletException;
 	
 	@Override
 	public abstract void execute() throws ServletException, IOException;
@@ -42,4 +40,6 @@ public abstract class AbstractDispatcher extends Dispatcher{
 		//return (long)request.getSession(true).getAttribute("id");
 		return (long) myRequest.getSession(true).getAttribute("id");
 	}
+	
+	public abstract void handleGet() throws IOException, ServletException;
 }

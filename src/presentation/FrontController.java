@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.dsrg.soenea.application.servlet.Servlet;
 import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
-import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
 import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.LoginDispatcher;
@@ -31,9 +30,10 @@ public class FrontController extends Servlet {
         super();
     }
     
-    
+    //this method called by Tomcat before servlet can accept requests
     public void init() throws ServletException {
     	
+    	//start the Db
     	startDb();
     	//add UoW
     }
@@ -44,6 +44,10 @@ public class FrontController extends Servlet {
 		//https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServletRequest.html#getServletPath()
 		//cannot use /* with this or else returns blank string
 		try {
+			
+		//creates a threadLocal for arriving users
+		super.preProcessRequest(request, response);
+		
 		String URL = request.getServletPath();
 		
 		AbstractDispatcher dispatcher = ProcessDispatcher(request, response, URL);
@@ -53,10 +57,17 @@ public class FrontController extends Servlet {
 		}else {
 		dispatcher.execute();
 		}
+		
+		//close the db and purge the threadlocal
+		super.postProcessRequest(request, response);
+		
 		}catch(Exception e) {
 			//no URL
 			request.setAttribute("message","The URL you provided does not exist");
 			request.getRequestDispatcher("/WEB-INF/jsp/Failure.jsp").forward(request, response);
+			
+			//close the db in case we catch an exception im not aware of
+			super.postProcessRequest(request, response);
 		}
 	}
 
@@ -77,19 +88,6 @@ public class FrontController extends Servlet {
     		e.printStackTrace();
     	}
     	
-    }
-    
-    public static void closeDb() {
-    	try {
-    		//thesis uses both of these methods, no idea why
-    		DbRegistry.getDbConnection().close();
-    		DbRegistry.closeDbConnectionIfNeeded();
-    		}
-    	catch (Exception e) {
-    		e.printStackTrace();
-    	}
-    	
-    	ThreadLocalTracker.purgeThreadLocal();
     }
     
     public AbstractDispatcher ProcessDispatcher(HttpServletRequest request, HttpServletResponse response, String URL) {

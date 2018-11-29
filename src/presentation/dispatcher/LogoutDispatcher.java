@@ -14,15 +14,29 @@ public class LogoutDispatcher extends AbstractDispatcher {
 	}
 
 	@Override
-	public void handleGet() throws IOException, ServletException {
+	public void execute() throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		try{
+			if(checkIfLoggedIn(myRequest)){	
+				myRequest.getSession(true).invalidate();
+				myRequest.setAttribute("message", "You have been successfully logged out.");
+				forward("/WEB-INF/jsp/Failure.jsp");
+			}else{
+				myRequest.setAttribute("message", "You are not logged in, cannot log out.");
+				forward("/WEB-INF/jsp/Failure.jsp");
+			}
+		
+		}catch(Exception e){
+			e.printStackTrace();
+			myRequest.setAttribute("message", "You are not logged in, cannot log out.");
+			forward("/WEB-INF/jsp/Failure.jsp");
 
+		}
 	}
 
 	@Override
-	public void execute() throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+	public void handleGet() throws IOException, ServletException {
+		this.execute();
 	}
 
 }

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.command.LoginCommand;
-import domain.command.RegisterCommand;
 
 public class LoginDispatcher extends AbstractDispatcher{
 
@@ -19,7 +18,7 @@ public class LoginDispatcher extends AbstractDispatcher{
 	public void execute() throws ServletException, IOException {
 		
 		try {
-			
+			myRequest.getSession(true).invalidate();
 			LoginCommand login = new LoginCommand(myHelper);
 			login.process();
 			forward("/WEB-INF/jsp/Success.jsp");

@@ -18,7 +18,7 @@ public class RegisterDispatcher extends AbstractDispatcher {
 	public void execute() throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			
+			myRequest.getSession(true).invalidate();
 			RegisterCommand register = new RegisterCommand(myHelper);
 			register.process();
 			forward("/WEB-INF/jsp/Success.jsp");
