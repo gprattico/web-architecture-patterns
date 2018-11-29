@@ -20,7 +20,8 @@ public class RegisterDispatcher extends AbstractDispatcher {
 		try {
 			
 			RegisterCommand register = new RegisterCommand(myHelper);
-			register.process();			
+			register.process();
+			forward("/WEB-INF/jsp/Success.jsp");
 			
 		}catch(Exception e) {
 			e.printStackTrace();

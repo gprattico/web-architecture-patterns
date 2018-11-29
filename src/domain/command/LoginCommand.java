@@ -5,15 +5,14 @@ import org.dsrg.soenea.domain.helper.Helper;
 
 import domain.user.User;
 import domain.user.UserInputMapper;
-import domain.user.UserOutputMapper;
 
-public class RegisterCommand extends AbstractCommand{
+public class LoginCommand extends AbstractCommand {
 
-	public RegisterCommand(Helper helper) {
+	public LoginCommand(Helper helper) {
 		super(helper);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public void process() throws CommandException {
 		try {
@@ -27,24 +26,21 @@ public class RegisterCommand extends AbstractCommand{
 				
 				User user = UserInputMapper.find(username);
 				
-				if(user != null) {
-					throw new CommandException("This username already exists.");
-				}else {
-				
-				user = new User(UserInputMapper.getMaxID(),1,username,password);//initial version set to 1
-				UserOutputMapper.insert(user);
-				
-				helper.setSessionAttribute("id", user.getId());
-				helper.setRequestAttribute("message", "You have successfully registered");
+				if(user ==null){
+					throw new CommandException("Username or password is incorrect.");
+
+				} else {
+					helper.setSessionAttribute("id", user.getId());
+					helper.setRequestAttribute("message", "You have successfully logged in.");
+					
 				}
+				
 			}
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CommandException(e);
 
 		}
 	}
-	
+
 }
