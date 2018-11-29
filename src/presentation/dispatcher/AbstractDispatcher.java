@@ -15,7 +15,7 @@ import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
  */
 public abstract class AbstractDispatcher extends Dispatcher{
 
-	public abstract void doGet() throws IOException, ServletException;
+	public abstract void handleGet() throws IOException, ServletException;
 	
 	@Override
 	public abstract void execute() throws ServletException, IOException;

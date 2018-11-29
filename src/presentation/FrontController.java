@@ -14,6 +14,7 @@ import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
 import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.LoginDispatcher;
+import presentation.dispatcher.LogoutDispatcher;
 import presentation.dispatcher.RegisterDispatcher;
 
 /**
@@ -45,12 +46,12 @@ public class FrontController extends Servlet {
 		try {
 		String URL = request.getServletPath();
 		
-		AbstractDispatcher dispatcher = getDispatcher(request, response, URL);
+		AbstractDispatcher dispatcher = ProcessDispatcher(request, response, URL);
 
 		if(request.getMethod().equals("GET")) {
-			dispatcher.doGet();
+			dispatcher.handleGet();
 		}else {
-			dispatcher.execute();
+		dispatcher.execute();
 		}
 		}catch(Exception e) {
 			//no URL
@@ -91,7 +92,7 @@ public class FrontController extends Servlet {
     	ThreadLocalTracker.purgeThreadLocal();
     }
     
-    public AbstractDispatcher getDispatcher(HttpServletRequest request, HttpServletResponse response, String URL) {
+    public AbstractDispatcher ProcessDispatcher(HttpServletRequest request, HttpServletResponse response, String URL) {
     	
     	AbstractDispatcher dispatcher = null;
     	
@@ -99,6 +100,8 @@ public class FrontController extends Servlet {
     		dispatcher = new RegisterDispatcher(request, response);
     	} else if(URL.equals("/Poke/Player/Login")) {
     		dispatcher = new LoginDispatcher(request,response);
+    	} else if(URL.equals("/Poke/Player/Logout")) {
+    		dispatcher = new LogoutDispatcher(request,response);
     	}
     	
     	return dispatcher;

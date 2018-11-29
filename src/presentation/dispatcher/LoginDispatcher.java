@@ -14,13 +14,17 @@ public class LoginDispatcher extends AbstractDispatcher{
 	
 	@Override
 	public void execute() throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
+//		try {
+//		LoginCommand login = new LoginCommand();
+//		}catch(Exception e) {
+//			
+//			
+//		}
 	}
 	
-	public void doGet() throws IOException, ServletException {
+	public void handleGet() throws IOException, ServletException {
 		forward("/WEB-INF/jsp/Success.jsp");
-		
 	}
 
 }
