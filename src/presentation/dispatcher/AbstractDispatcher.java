@@ -3,6 +3,7 @@ package presentation.dispatcher;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
@@ -13,9 +14,13 @@ import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
  * @author Giovanni
  *
  */
-public abstract class AbstractDispatcher extends Dispatcher{
+public abstract class AbstractDispatcher{
 
-	@Override
+	/**
+	 * 
+	 */
+	//private static final long serialVersionUID = 1L;
+
 	public abstract void execute() throws ServletException, IOException;
 
 	protected boolean checkIfLoggedIn(HttpServletRequest request){

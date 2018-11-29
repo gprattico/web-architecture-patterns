@@ -14,6 +14,7 @@ import org.dsrg.soenea.application.servlet.impl.SmartDispatcherServlet;
 import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
+import org.dsrg.soenea.uow.UoW;
 
 import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.LoginDispatcher;
@@ -24,7 +25,7 @@ import presentation.dispatcher.LoginDispatcher;
  * Extends servlet class, inheriting the processRequest method
  */
 @WebServlet("/")
-public class FrontController extends Servlet {
+public class FrontController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
        
@@ -37,9 +38,19 @@ public class FrontController extends Servlet {
     	
     	startDb();
     	//add UoW
+    	//UoW uow = new Uow();
     }
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	@Override
+		this.processRequest(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		this.processRequest(request, response);
+	}
+
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
 		
 		//https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServletRequest.html#getServletPath()
@@ -51,18 +62,12 @@ public class FrontController extends Servlet {
 		
 		AbstractDispatcher dispatcher = getDispatcher(request, response, URL);
 		out.println(dispatcher);
-		//out.println(dispatcher.toString());
-		
-		//dispatcher.init(request, response);
+
 		if(request.getMethod().equals("GET")) {
 			dispatcher.doGet();
 		}else {
 			dispatcher.execute();
 		}
-		
-		
-		//dispatcher.execute();
-		
 	}
 
     public static synchronized void startDb() {

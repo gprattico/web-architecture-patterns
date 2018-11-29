@@ -8,8 +8,18 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginDispatcher extends AbstractDispatcher{
 
+	/**
+	 * 
+	 */
+	//private static final long serialVersionUID = 1L;
+	HttpServletRequest request;
+	HttpServletResponse response;
+	
+	
 	public LoginDispatcher(HttpServletRequest request, HttpServletResponse response) {
-		super.init(request, response);
+		//super.init(request, response);
+		this.request = request;
+		this.response = response;
 	}
 	
 	@Override
@@ -19,8 +29,10 @@ public class LoginDispatcher extends AbstractDispatcher{
 	}
 	
 	public void doGet() throws IOException, ServletException {
-		forward("/WEB-INF/jsp/Success.jsp");
-		
+		//forward("/WEB-INF/jsp/Success.jsp");
+		//request.getRequestDispatcher("///W")
+		request.getRequestDispatcher("WEB-INF/jsp/Success.jsp").forward(request, response);
+
 	}
 
 }
