@@ -6,9 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
-import org.dsrg.soenea.service.MySQLConnectionFactory;
-import org.dsrg.soenea.service.threadLocal.DbRegistry;
-import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
 /**
  * An abstract class to make all dispatchers come with checkIfLoggedIn() and currentSession()
@@ -17,6 +14,8 @@ import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
  *
  */
 public abstract class AbstractDispatcher extends Dispatcher{
+	
+	//public abstract AbstractDispatcher() {super.init(req, res);;
 	
 	@Override
 	public abstract void execute() throws ServletException, IOException;

@@ -12,6 +12,7 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
 import presentation.dispatcher.AbstractDispatcher;
+import presentation.dispatcher.ListPlayersDispatcher;
 import presentation.dispatcher.LoginDispatcher;
 import presentation.dispatcher.LogoutDispatcher;
 import presentation.dispatcher.RegisterDispatcher;
@@ -100,6 +101,8 @@ public class FrontController extends Servlet {
     		dispatcher = new LoginDispatcher(request,response);
     	} else if(URL.equals("/Poke/Player/Logout")) {
     		dispatcher = new LogoutDispatcher(request,response);
+    	} else if(URL.equals("/Poke/Player")) {
+    		dispatcher = new ListPlayersDispatcher(request, response);
     	}
     	
     	return dispatcher;
