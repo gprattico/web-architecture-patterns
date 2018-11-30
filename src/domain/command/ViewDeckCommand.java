@@ -30,7 +30,7 @@ public class ViewDeckCommand extends AbstractCommand{
 				cardList = CardInputMapper.findAll(deckID);
 
 				helper.setRequestAttribute("cardList", cardList);
-				helper.setRequestAttribute("deckID", deckID);
+				//helper.setRequestAttribute("deckID", deckID);
 				
 			}
 		} catch (Exception e) {

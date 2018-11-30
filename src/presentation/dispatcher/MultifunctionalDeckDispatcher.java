@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.command.UploadDeckCommand;
 import domain.command.ViewDecksCommand;
 
 public class MultifunctionalDeckDispatcher extends AbstractDispatcher {
@@ -19,8 +20,26 @@ public class MultifunctionalDeckDispatcher extends AbstractDispatcher {
 	//handle POST (upload)
 	@Override
 	public void execute() throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
+		try {
+		if(checkIfLoggedIn(myRequest)) {
+			
+			UploadDeckCommand uploadDeck = new UploadDeckCommand(myHelper);
+			uploadDeck.process();
+			forward("/WEB-INF/jsp/Success.jsp");
+			
+			
+		}else {
+			myRequest.setAttribute("message", "Not logged in.");
+			forward("/WEB-INF/jsp/Failure.jsp");
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+			myRequest.setAttribute("message", e.getMessage());
+			forward("/WEB-INF/jsp/Failure.jsp");
+		}
+		
+		
 	}
 
 	//handle GET ViewDecks and Get Deck Form
