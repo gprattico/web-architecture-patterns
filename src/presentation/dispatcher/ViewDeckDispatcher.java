@@ -1,7 +1,6 @@
 package presentation.dispatcher;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +26,10 @@ public class ViewDeckDispatcher extends AbstractDispatcher {
 		// TODO Auto-generated method stub
 		try {
 			if(checkIfLoggedIn(myRequest)) {
+				
+				String[] requestPath = myRequest.getServletPath().trim().split("/");
+				int deckID = Integer.parseInt(requestPath[requestPath.length-1]);
+				myHelper.setRequestAttribute("deckID", deckID);
 				
 				ViewDeckCommand viewDeck = new ViewDeckCommand(myHelper);
 				viewDeck.process();

@@ -51,7 +51,7 @@ public class DeckFinder {
 		return rs;
 	}
 	
-public static ResultSet findByUserID(long id) throws SQLException{
+	public static ResultSet findByUserID(long id) throws SQLException{
 		
 		Connection con = DbRegistry.getDbConnection();
 		
@@ -66,6 +66,19 @@ public static ResultSet findByUserID(long id) throws SQLException{
 //		
 //		rs.close();
 //		ps.close();
+		
+		return rs;
+		
+	}
+
+	public static ResultSet findAllByUserID(long id) throws SQLException {
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM deck WHERE userID = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, id);
+		ResultSet rs = ps.executeQuery();
 		
 		return rs;
 		

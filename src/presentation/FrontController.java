@@ -17,6 +17,7 @@ import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.ListPlayersDispatcher;
 import presentation.dispatcher.LoginDispatcher;
 import presentation.dispatcher.LogoutDispatcher;
+import presentation.dispatcher.MultifunctionalDeckDispatcher;
 import presentation.dispatcher.RegisterDispatcher;
 import presentation.dispatcher.ViewDeckDispatcher;
 
@@ -110,6 +111,8 @@ public class FrontController extends Servlet {
     	} else if(Pattern.compile(viewDeckURL+"/\\d+").matcher(URL).matches()) {
     		System.out.println("made it here 2");
     		dispatcher = new ViewDeckDispatcher(request, response);//view a single deck
+    	} else if (URL.equals("/Poke/Deck")) {
+    		dispatcher = new MultifunctionalDeckDispatcher(request, response);
     	}
     	
     	return dispatcher;
