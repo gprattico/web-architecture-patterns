@@ -14,6 +14,7 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
 import presentation.dispatcher.AbstractDispatcher;
+import presentation.dispatcher.ChallengeDispatcher;
 import presentation.dispatcher.ListPlayersDispatcher;
 import presentation.dispatcher.LoginDispatcher;
 import presentation.dispatcher.LogoutDispatcher;
@@ -99,7 +100,6 @@ public class FrontController extends Servlet {
     	AbstractDispatcher dispatcher = null;
     	
     	final String viewDeckURL = "/Poke/Deck";
-    	System.out.println("made it to Process Dispatcher.");
     	if(URL.equals("/Poke/Player/Register")) {
     		dispatcher = new RegisterDispatcher(request, response);
     	} else if(URL.equals("/Poke/Player/Login")) {
@@ -109,10 +109,11 @@ public class FrontController extends Servlet {
     	} else if(URL.equals("/Poke/Player")) {
     		dispatcher = new ListPlayersDispatcher(request, response);
     	} else if(Pattern.compile(viewDeckURL+"/\\d+").matcher(URL).matches()) {
-    		System.out.println("made it here 2");
     		dispatcher = new ViewDeckDispatcher(request, response);//view a single deck
     	} else if (URL.equals("/Poke/Deck")) {
     		dispatcher = new MultifunctionalDeckDispatcher(request, response);
+    	} else if (URL.equals("/Poke/Challenge")) {
+    		dispatcher = new ChallengeDispatcher(request,response);
     	}
     	
     	return dispatcher;

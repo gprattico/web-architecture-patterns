@@ -12,7 +12,7 @@ public class ChallengeTDG {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "INSERT INTO challenge (id, challenger,challengee, status) VALUES (?,?,?,?)";
+		String query = "INSERT INTO challenge (id, challenger,challengee, status) VALUES (?,?,?,?,1)";
 		
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, id);
@@ -26,18 +26,19 @@ public class ChallengeTDG {
 		
 	}
 	
-	public static int update(long challenger, long challengee, int status, long id) throws SQLException{
+	public static int update(long challenger, long challengee, int status, long id, int version) throws SQLException{
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "UPDATE challenge SET challenger = ?, challengee = ?, status= ? WHERE id=?;"; 
+		String query = "UPDATE challenge SET challenger = ?, challengee = ?, status= ? WHERE id=? AND version = ?;"; 
 		
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challenger);
 		ps.setLong(2, challengee);
 		ps.setInt(3, status);
 		ps.setLong(4, id);
-		
+		ps.setInt(5, version);
+
 		int count = ps.executeUpdate();
 		
 		ps.close();

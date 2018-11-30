@@ -28,10 +28,6 @@ public class ListChallenges extends AbstractController {
 			
 			if(checkIfLoggedIn(request)){
 				ArrayList<Challenge> challenge = ChallengeInputMapper.findAll();
-				//ArrayList<ChallengeHelper> challenge = new ArrayList<ChallengeHelper>();
-							
-//				for(ChallengeRDG rdg : rdgchallenge)
-//					challenge.add(new ChallengeHelper(rdg.getId(),rdg.getChallenger(),rdg.getChallengee(),rdg.getStatus()));
 				
 					request.setAttribute("challenge", challenge);
 					request.getRequestDispatcher("WEB-INF/jsp/ListChallenges.jsp").forward(request, response);

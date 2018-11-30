@@ -14,7 +14,7 @@ public class ChallengeOutputMapper {
 	
 	public static void update(Challenge challenge) throws SQLException{
 		
-		ChallengeTDG.update(challenge.getChallenger(), challenge.getChallengee(), challenge.getStatus(), challenge.getId());
+		ChallengeTDG.update(challenge.getChallenger(), challenge.getChallengee(), challenge.getStatus(), challenge.getId(), challenge.getVersion());
 	}
 	
 	public static void delete(Challenge challenge) throws SQLException{

@@ -2,6 +2,7 @@ package domain.challenge;
 
 import java.sql.SQLException;
 
+import domain.deck.DeckInputMapper;
 import domain.user.User;
 import domain.user.UserInputMapper;
 
@@ -11,13 +12,23 @@ public class Challenge {
 	long challenger;
 	long challengee;
 	int status;
+	int version;
 	
-	public Challenge(long id, long challenger, long challengee, int status) {
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public Challenge(long id, long challenger, long challengee, int status, int version) {
 		super();
 		this.id = id;
 		this.challenger = challenger;
 		this.challengee = challengee;
 		this.status = status;
+		this.version = version;
 	}
 
 	public long getChallenger() {
@@ -49,13 +60,19 @@ public class Challenge {
 	}
 	
 	//returns the username of the challenger in this challenge
-		public String findChallengerUsername() throws SQLException{
+	public String findChallengerUsername() throws SQLException{
 			User user = UserInputMapper.find(challenger);
 			
 			String temp="";
 			temp = user.getUsername();	
 			
 			return temp;
-		}
+	}
+	
+	public long getChallengerDeckID() throws SQLException {
+		
+		return DeckInputMapper.find(this.challenger).getId();
+		
+	}
 	
 }
