@@ -52,9 +52,7 @@ public class FrontController extends Servlet {
 		//creates a threadLocal for arriving users
 		super.preProcessRequest(request, response);
 		
-		String URL = request.getServletPath();
-		
-		AbstractDispatcher dispatcher = ProcessDispatcher(request, response, URL);
+		AbstractDispatcher dispatcher = ProcessDispatcher(request, response);
 
 		if(request.getMethod().equals("GET")) {
 			dispatcher.handleGet();
@@ -94,16 +92,13 @@ public class FrontController extends Servlet {
     	
     }
     
-    public AbstractDispatcher ProcessDispatcher(HttpServletRequest request, HttpServletResponse response, String URL) {
+    public AbstractDispatcher ProcessDispatcher(HttpServletRequest request, HttpServletResponse response) {
     	
+    	String URL = request.getServletPath();
     	AbstractDispatcher dispatcher = null;
     	
-    	String numberAfterSlash = "//d+";
-    	Pattern numberCompiled = Pattern.compile(numberAfterSlash);
-    	Matcher matcher = numberCompiled.matcher(URL);
-    	
-    	//matcher.matches()
-    	
+    	final String viewDeckURL = "/Poke/Deck";
+    	System.out.println("made it here 1");
     	if(URL.equals("/Poke/Player/Register")) {
     		dispatcher = new RegisterDispatcher(request, response);
     	} else if(URL.equals("/Poke/Player/Login")) {
@@ -112,7 +107,8 @@ public class FrontController extends Servlet {
     		dispatcher = new LogoutDispatcher(request,response);
     	} else if(URL.equals("/Poke/Player")) {
     		dispatcher = new ListPlayersDispatcher(request, response);
-    	} else if(URL.equals("/Poke/Deck/"+"\\d+")) {
+    	} else if(Pattern.compile(viewDeckURL+"/\\d+").matcher(URL).matches()) {
+    		System.out.println("made it here 2");
     		dispatcher = new ViewDeckDispatcher(request, response);//view a single deck
     	}
     	
