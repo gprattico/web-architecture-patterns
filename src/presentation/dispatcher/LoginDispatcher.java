@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import domain.command.LoginCommand;
 
 public class LoginDispatcher extends AbstractDispatcher{
-
-	public LoginDispatcher(HttpServletRequest request, HttpServletResponse response) {
-		super.init(request, response);
-	}
 	
+	public LoginDispatcher(HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void execute() throws ServletException, IOException {
 		

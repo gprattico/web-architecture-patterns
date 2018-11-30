@@ -11,7 +11,7 @@ import domain.command.RegisterCommand;
 public class RegisterDispatcher extends AbstractDispatcher {
 
 	public RegisterDispatcher(HttpServletRequest request, HttpServletResponse response) {
-		super.init(request, response);
+		super(request, response);
 	}
 
 	@Override

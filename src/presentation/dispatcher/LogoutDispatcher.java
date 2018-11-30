@@ -10,7 +10,7 @@ public class LogoutDispatcher extends AbstractDispatcher {
 
 	public LogoutDispatcher(HttpServletRequest request, HttpServletResponse response) {
 
-		super.init(request, response);
+		super(request, response);
 	}
 
 	@Override

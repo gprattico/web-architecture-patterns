@@ -16,6 +16,7 @@ import presentation.dispatcher.ListPlayersDispatcher;
 import presentation.dispatcher.LoginDispatcher;
 import presentation.dispatcher.LogoutDispatcher;
 import presentation.dispatcher.RegisterDispatcher;
+import presentation.dispatcher.ViewDeckDispatcher;
 
 /**
  * Servlet implementation class FrontController
@@ -103,6 +104,8 @@ public class FrontController extends Servlet {
     		dispatcher = new LogoutDispatcher(request,response);
     	} else if(URL.equals("/Poke/Player")) {
     		dispatcher = new ListPlayersDispatcher(request, response);
+    	} else if(URL.equals("/Poke/Deck")) {
+    		dispatcher = new ViewDeckDispatcher(request, response);//view a single deck
     	}
     	
     	return dispatcher;

@@ -11,8 +11,8 @@ import domain.command.ListPlayersCommand;
 public class ListPlayersDispatcher extends AbstractDispatcher {
 
 	public ListPlayersDispatcher(HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
 		// TODO Auto-generated constructor stub
-		super.init(request, response);
 	}
 
 	@Override

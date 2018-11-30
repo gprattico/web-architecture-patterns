@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
 
@@ -15,7 +16,10 @@ import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
  */
 public abstract class AbstractDispatcher extends Dispatcher{
 	
-	//public abstract AbstractDispatcher() {super.init(req, res);;
+	public AbstractDispatcher(HttpServletRequest request, HttpServletResponse response)
+	{
+		super.init(request, response);
+	}
 	
 	@Override
 	public abstract void execute() throws ServletException, IOException;
