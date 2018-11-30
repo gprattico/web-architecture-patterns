@@ -1,6 +1,7 @@
 package presentation.dispatcher;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +28,12 @@ public class ViewDeckDispatcher extends AbstractDispatcher {
 		try {
 			if(checkIfLoggedIn(myRequest)) {
 				
-				ViewDeckCommand viewDeck = new ViewDeckCommand(myHelper);
-				viewDeck.process();
-				forward("/WEB-INF/jsp/ViewDeck.jsp");
-				
+//				ViewDeckCommand viewDeck = new ViewDeckCommand(myHelper);
+//				viewDeck.process();
+//				forward("/WEB-INF/jsp/ViewDeck.jsp");
+//				
+				PrintWriter out = myResponse.getWriter();
+				out.print("Made it to viewDeck dispatcher!");
 				
 			}else {
 //				throw new NotLoggedInExc

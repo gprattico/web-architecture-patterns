@@ -1,6 +1,8 @@
 package presentation;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -96,6 +98,12 @@ public class FrontController extends Servlet {
     	
     	AbstractDispatcher dispatcher = null;
     	
+    	String numberAfterSlash = "//d+";
+    	Pattern numberCompiled = Pattern.compile(numberAfterSlash);
+    	Matcher matcher = numberCompiled.matcher(URL);
+    	
+    	//matcher.matches()
+    	
     	if(URL.equals("/Poke/Player/Register")) {
     		dispatcher = new RegisterDispatcher(request, response);
     	} else if(URL.equals("/Poke/Player/Login")) {
@@ -104,7 +112,7 @@ public class FrontController extends Servlet {
     		dispatcher = new LogoutDispatcher(request,response);
     	} else if(URL.equals("/Poke/Player")) {
     		dispatcher = new ListPlayersDispatcher(request, response);
-    	} else if(URL.equals("/Poke/Deck")) {
+    	} else if(URL.equals("/Poke/Deck/"+"\\d+")) {
     		dispatcher = new ViewDeckDispatcher(request, response);//view a single deck
     	}
     	
