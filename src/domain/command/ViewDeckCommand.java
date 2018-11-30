@@ -28,7 +28,7 @@ public class ViewDeckCommand extends AbstractCommand{
 				long deckID = deck.getId();
 				ArrayList<Card> cardList = new ArrayList<Card>();
 				cardList = CardInputMapper.findAll(deckID);
-
+				
 				helper.setRequestAttribute("cardList", cardList);
 				//helper.setRequestAttribute("deckID", deckID);
 				
