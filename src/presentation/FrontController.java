@@ -98,7 +98,7 @@ public class FrontController extends Servlet {
     	AbstractDispatcher dispatcher = null;
     	
     	final String viewDeckURL = "/Poke/Deck";
-    	System.out.println("made it here 1");
+    	System.out.println("made it to Process Dispatcher.");
     	if(URL.equals("/Poke/Player/Register")) {
     		dispatcher = new RegisterDispatcher(request, response);
     	} else if(URL.equals("/Poke/Player/Login")) {

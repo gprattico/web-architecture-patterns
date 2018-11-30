@@ -28,12 +28,9 @@ public class ViewDeckDispatcher extends AbstractDispatcher {
 		try {
 			if(checkIfLoggedIn(myRequest)) {
 				
-//				ViewDeckCommand viewDeck = new ViewDeckCommand(myHelper);
-//				viewDeck.process();
-//				forward("/WEB-INF/jsp/ViewDeck.jsp");
-//				
-				PrintWriter out = myResponse.getWriter();
-				out.print("Made it to viewDeck dispatcher!");
+				ViewDeckCommand viewDeck = new ViewDeckCommand(myHelper);
+				viewDeck.process();
+				forward("/WEB-INF/jsp/ViewDeck.jsp");
 				
 			}else {
 //				throw new NotLoggedInExc
