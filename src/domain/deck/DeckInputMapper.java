@@ -53,4 +53,16 @@ public class DeckInputMapper {
 		return deckList;
 		
 	}
+
+	public static ArrayList<Deck> findAll() throws SQLException {
+		// TODO Auto-generated method stub
+		
+		ResultSet rs = DeckFinder.findAll();
+		
+		ArrayList<Deck> deckList = new ArrayList<Deck>();
+		while(rs.next())
+			deckList.add(new Deck(rs.getLong("id"), rs.getLong("userID")));
+
+		return deckList;
+	}
 }

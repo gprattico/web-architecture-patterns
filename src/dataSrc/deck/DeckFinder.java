@@ -83,5 +83,15 @@ public class DeckFinder {
 		return rs;
 		
 	}
+
+	public static ResultSet findAll() throws SQLException {
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM deck;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		
+		return rs;
+	}
 	
 }

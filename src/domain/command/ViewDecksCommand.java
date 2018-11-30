@@ -18,7 +18,7 @@ public class ViewDecksCommand extends AbstractCommand {
 	@Override
 	public void process() throws CommandException {
 		try {
-			ArrayList<Deck> deckList = DeckInputMapper.findAllByUserId((long)helper.getSessionAttribute("id"));
+			ArrayList<Deck> deckList = DeckInputMapper.findAll();
 			
 			helper.setRequestAttribute("deckList", deckList);
 			

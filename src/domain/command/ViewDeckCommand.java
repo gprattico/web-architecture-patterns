@@ -20,7 +20,7 @@ public class ViewDeckCommand extends AbstractCommand{
 	@Override
 	public void process() throws CommandException {
 		try {
-			Deck deck = DeckInputMapper.find((long)helper.getRequestAttribute("deckID"));
+			Deck deck = DeckInputMapper.find(new Long((long)helper.getRequestAttribute("deckID")));
 
 			if(deck ==null) {
 				throw new CommandException("You have no deck");

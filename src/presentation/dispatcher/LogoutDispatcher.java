@@ -20,7 +20,7 @@ public class LogoutDispatcher extends AbstractDispatcher {
 			if(checkIfLoggedIn(myRequest)){	
 				myRequest.getSession(true).invalidate();
 				myRequest.setAttribute("message", "You have been successfully logged out.");
-				forward("/WEB-INF/jsp/Failure.jsp");
+				forward("/WEB-INF/jsp/Success.jsp");
 			}else{
 				myRequest.setAttribute("message", "You are not logged in, cannot log out.");
 				forward("/WEB-INF/jsp/Failure.jsp");
