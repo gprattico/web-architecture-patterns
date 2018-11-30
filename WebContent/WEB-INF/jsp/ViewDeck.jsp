@@ -10,7 +10,7 @@
 					<c:set var = "basicName" value = "${fn:split(card.name, ' ')[1]}"/>
 				</c:if>
 	
-				{"id": "${card.id}","t": "${card.type}","n": "${fn:split(card.name, ' ')[0]}" <c:if test="${not empty fn:split(card.name, ' ')[1]}">,"${fn:split(card.name, ' ')[1]}"</c:if>}<c:if test="${!loop.last}">,</c:if>
+				{"id": "${card.id}","t": "${card.type}","n": "${fn:split(card.name, ' ')[0]}" <c:if test="${not empty fn:split(card.name, ' ')[1]}">,"b":"${fn:split(card.name, ' ')[1]}"</c:if>}<c:if test="${!loop.last}">,</c:if>
 			</c:forEach>
 		]
 }
