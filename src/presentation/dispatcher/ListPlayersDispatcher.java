@@ -36,7 +36,9 @@ public class ListPlayersDispatcher extends AbstractDispatcher {
 			forward("/WEB-INF/jsp/Failure.jsp");
 		}
 		}catch(Exception e){
-		
+			e.printStackTrace();
+			myRequest.setAttribute("message", e.getMessage());
+			forward("/WEB-INF/jsp/Failure.jsp");
 		}
 	}
 

@@ -8,13 +8,13 @@ public class ChallengeOutputMapper {
 
 	public static void insert(Challenge challenge) throws SQLException {
 		
-		ChallengeTDG.insert(challenge.getId(), challenge.getChallenger(), challenge.getChallengee(), challenge.getStatus());
+		ChallengeTDG.insert(challenge.getId(), challenge.getChallenger(), challenge.getChallengee(), challenge.getStatus(),challenge.getVersion(),challenge.getDeckOfChallenger());
 		
 	}
 	
 	public static void update(Challenge challenge) throws SQLException{
 		
-		ChallengeTDG.update(challenge.getChallenger(), challenge.getChallengee(), challenge.getStatus(), challenge.getId(), challenge.getVersion());
+		ChallengeTDG.update(challenge.getChallenger(), challenge.getChallengee(), challenge.getStatus(), challenge.getId(), challenge.getVersion(),challenge.getDeckOfChallenger());
 	}
 	
 	public static void delete(Challenge challenge) throws SQLException{

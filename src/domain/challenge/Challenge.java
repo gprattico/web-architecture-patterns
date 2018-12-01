@@ -13,6 +13,7 @@ public class Challenge {
 	long challengee;
 	int status;
 	int version;
+	long deckOfChallenger;
 	
 	public int getVersion() {
 		return version;
@@ -22,13 +23,22 @@ public class Challenge {
 		this.version = version;
 	}
 
-	public Challenge(long id, long challenger, long challengee, int status, int version) {
+	public Challenge(long id, long challenger, long challengee, int status, int version, long deckOfChallenger) {
 		super();
 		this.id = id;
 		this.challenger = challenger;
 		this.challengee = challengee;
 		this.status = status;
 		this.version = version;
+		this.deckOfChallenger=deckOfChallenger;
+	}
+
+	public long getDeckOfChallenger() {
+		return deckOfChallenger;
+	}
+
+	public void setDeckOfChallenger(long deckOfChallenger) {
+		this.deckOfChallenger = deckOfChallenger;
 	}
 
 	public long getChallenger() {

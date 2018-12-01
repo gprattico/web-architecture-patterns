@@ -36,7 +36,7 @@ public class ChallengeFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT id, challenger, challengee, status, version FROM challenge WHERE id = ?;";
+		String query = "SELECT id, challenger, challengee, status, version, deckOfChallenger FROM challenge WHERE id = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, id);
 		ResultSet rs = ps.executeQuery();
@@ -57,7 +57,7 @@ public class ChallengeFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT id, challenger, challengee, status, version FROM challenge WHERE challenger = ? AND status = ?;";
+		String query = "SELECT id, challenger, challengee, status, version, deckOfChallenger FROM challenge WHERE challenger = ? AND status = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challenger);
 		ps.setInt(2, 0);//only concerned with open challenges
@@ -80,7 +80,7 @@ public class ChallengeFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT id, challenger, challengee, status, version FROM challenge WHERE challengee = ? AND status = ?;";
+		String query = "SELECT id, challenger, challengee, status, version, deckOfChallenger FROM challenge WHERE challengee = ? AND status = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challengee);
 		ps.setInt(2, 0);//open challenges
