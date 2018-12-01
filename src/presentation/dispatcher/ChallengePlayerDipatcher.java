@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.command.ChallengePlayerCommand;
+import domain.deck.DeckInputMapper;
 
 public class ChallengePlayerDipatcher extends AbstractDispatcher {
 
@@ -27,6 +28,13 @@ public class ChallengePlayerDipatcher extends AbstractDispatcher {
 				Long playerID = Long.parseLong(requestPath[requestPath.length-2]);
 				myHelper.setRequestAttribute("playerID", playerID);
 				long deckUsedToChallenge = Long.parseLong(myRequest.getParameter("deck"));
+				
+				System.out.println(deckUsedToChallenge);
+				//check if deck exists
+				if(DeckInputMapper.find(deckUsedToChallenge) == null) {
+					throw new Exception("Deck id does not exist");
+				}
+				
 				myHelper.setRequestAttribute("deckUsedToChallenge", deckUsedToChallenge);
 				
 				ChallengePlayerCommand challengePlayer = new ChallengePlayerCommand(myHelper);
