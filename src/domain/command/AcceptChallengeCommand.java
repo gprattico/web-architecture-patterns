@@ -30,6 +30,9 @@ public class AcceptChallengeCommand extends AbstractCommand {
 		if(challenge.getChallenger() == (long)helper.getSessionAttribute("id")) {
 			throw new CommandException("Cannot challenge yourself");
 		}
+		if(challenge.getChallengee() != (long)helper.getSessionAttribute("id")) {
+			throw new CommandException("This is not a challenge against you.");
+		}
 		
 		if(challenge.getVersion() != (int)helper.getRequestAttribute("challengeVersion")) {
 			throw new LostUpdateException("Incorrect Version. Try refreshing your browser and trying again.");
