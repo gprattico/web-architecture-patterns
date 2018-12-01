@@ -13,6 +13,7 @@ import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
 import presentation.dispatcher.AbstractDispatcher;
+import presentation.dispatcher.AcceptChallengeDispatcher;
 import presentation.dispatcher.ChallengeDispatcher;
 import presentation.dispatcher.ChallengePlayerDipatcher;
 import presentation.dispatcher.ListPlayersDispatcher;
@@ -118,6 +119,8 @@ public class FrontController extends Servlet {
     		dispatcher = new ChallengeDispatcher(request,response);
     	} else if (Pattern.compile(challengePlayerURL+"/\\d+"+"/Challenge").matcher(URL).matches()) {
     		dispatcher = new ChallengePlayerDipatcher(request,response);
+    	} else if(Pattern.compile("/Poke/Challenge"+"/\\d+"+"/Accept").matcher(URL).matches()) {
+    		dispatcher = new AcceptChallengeDispatcher(request,response);
     	}
     	
     	return dispatcher;
