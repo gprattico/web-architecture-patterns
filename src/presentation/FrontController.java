@@ -1,7 +1,6 @@
 package presentation;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -15,6 +14,7 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
 import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.ChallengeDispatcher;
+import presentation.dispatcher.ChallengePlayerDipatcher;
 import presentation.dispatcher.ListPlayersDispatcher;
 import presentation.dispatcher.LoginDispatcher;
 import presentation.dispatcher.LogoutDispatcher;
@@ -100,6 +100,8 @@ public class FrontController extends Servlet {
     	AbstractDispatcher dispatcher = null;
     	
     	final String viewDeckURL = "/Poke/Deck";
+    	final String challengePlayerURL = "/Poke/Player";
+    	
     	if(URL.equals("/Poke/Player/Register")) {
     		dispatcher = new RegisterDispatcher(request, response);
     	} else if(URL.equals("/Poke/Player/Login")) {
@@ -114,6 +116,8 @@ public class FrontController extends Servlet {
     		dispatcher = new MultifunctionalDeckDispatcher(request, response);
     	} else if (URL.equals("/Poke/Challenge")) {
     		dispatcher = new ChallengeDispatcher(request,response);
+    	} else if (Pattern.compile(challengePlayerURL+"/\\d+"+"/Challenge").matcher(URL).matches()) {
+    		dispatcher = new ChallengePlayerDipatcher(request,response);
     	}
     	
     	return dispatcher;

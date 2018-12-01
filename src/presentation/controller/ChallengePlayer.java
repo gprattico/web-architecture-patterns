@@ -66,7 +66,7 @@ public class ChallengePlayer extends AbstractController {
 			if(checkIfLoggedIn(request)&&hasDeck(request)&&(Integer.parseInt(request.getParameter("player"))!=(long)request.getSession(true).getAttribute("id"))){
 				
 				Challenge helper = new Challenge(ChallengeInputMapper.getMaxChallengeID(),
-				(long)request.getSession().getAttribute("id"), Integer.parseInt(request.getParameter("player")),0 );
+				(long)request.getSession().getAttribute("id"), Integer.parseInt(request.getParameter("player")),0,1 );
 				
 //				Challenge rdg = new Challenge(helper.getId(),helper.getChallenger(),helper.getChallengee(),
 //						helper.getStatus());

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
 
+import domain.deck.Deck;
+import domain.deck.DeckInputMapper;
+
 /**
  * An abstract class to make all dispatchers come with checkIfLoggedIn() and currentSession()
  * This class extends SOENEA's dispatcher, as to inherit execute
@@ -42,6 +45,23 @@ public abstract class AbstractDispatcher extends Dispatcher{
 		
 		//return (long)request.getSession(true).getAttribute("id");
 		return (long) myRequest.getSession(true).getAttribute("id");
+	}
+	
+	protected boolean hasDeck(HttpServletRequest request) {
+		
+		try {
+			Deck deck = DeckInputMapper.findByUserID((long)request.getSession(true).getAttribute("id"));
+			if(deck == null)
+				return false;
+			else
+				return true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		
 	}
 	
 	public abstract void handleGet() throws IOException, ServletException;
