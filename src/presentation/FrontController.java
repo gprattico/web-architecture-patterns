@@ -20,8 +20,10 @@ import presentation.dispatcher.ListPlayersDispatcher;
 import presentation.dispatcher.LoginDispatcher;
 import presentation.dispatcher.LogoutDispatcher;
 import presentation.dispatcher.MultifunctionalDeckDispatcher;
+import presentation.dispatcher.RefuseChallengeDispatcher;
 import presentation.dispatcher.RegisterDispatcher;
 import presentation.dispatcher.ViewDeckDispatcher;
+import presentation.dispatcher.WithdrawChallengeDispatcher;
 
 /**
  * Servlet implementation class FrontController
@@ -121,8 +123,11 @@ public class FrontController extends Servlet {
     		dispatcher = new ChallengePlayerDipatcher(request,response);
     	} else if(Pattern.compile("/Poke/Challenge"+"/\\d+"+"/Accept").matcher(URL).matches()) {
     		dispatcher = new AcceptChallengeDispatcher(request,response);
+    	} else if(Pattern.compile("/Poke/Challenge"+"/\\d+"+"/Refuse").matcher(URL).matches()) {
+    		dispatcher = new RefuseChallengeDispatcher(request,response);
+    	} else if (Pattern.compile("/Poke/Challenge"+"/\\d"+"/Withdraw").matcher(URL).matches()) {
+    		dispatcher = new WithdrawChallengeDispatcher(request,response);
     	}
-    	
     	return dispatcher;
     	
     }
