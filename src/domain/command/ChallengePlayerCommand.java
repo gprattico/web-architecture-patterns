@@ -25,7 +25,9 @@ public class ChallengePlayerCommand extends AbstractCommand {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new CommandException("Error in ChallengePlayerCommand");
+			System.out.println(e.getCause());
+			System.out.println(e.getMessage());
+			throw new CommandException(e.getMessage());
 		}
 	}
 }
