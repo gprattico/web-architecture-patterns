@@ -34,7 +34,7 @@ public class ChallengeDispatcher extends AbstractDispatcher {
 				
 			}else{
 				myRequest.setAttribute("message", "You are not logged in.");
-				forward("WEB-INF/jsp/Failure.jsp");
+				forward("/WEB-INF/jsp/Failure.jsp");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
