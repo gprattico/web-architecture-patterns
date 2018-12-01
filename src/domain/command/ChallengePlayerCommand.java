@@ -6,6 +6,7 @@ import org.dsrg.soenea.domain.helper.Helper;
 import domain.challenge.Challenge;
 import domain.challenge.ChallengeInputMapper;
 import domain.challenge.ChallengeOutputMapper;
+import domain.challenge.ChallengeStatus;
 
 public class ChallengePlayerCommand extends AbstractCommand {
 
@@ -18,7 +19,7 @@ public class ChallengePlayerCommand extends AbstractCommand {
 		try {	
 			
 			Challenge challenge = new Challenge(ChallengeInputMapper.getMaxChallengeID(),
-			(long)helper.getSessionAttribute("id"), (long)helper.getRequestAttribute("playerID"),1,0,(long)helper.getRequestAttribute("deckUsedToChallenge"));//0 for challenge status, 1 for version
+			(long)helper.getSessionAttribute("id"), (long)helper.getRequestAttribute("playerID"),ChallengeStatus.open.ordinal(),1,(long)helper.getRequestAttribute("deckUsedToChallenge"));//0 for challenge status, 1 for version
 			
 			ChallengeOutputMapper.insert(challenge);
 			//myRequest.setAttribute();

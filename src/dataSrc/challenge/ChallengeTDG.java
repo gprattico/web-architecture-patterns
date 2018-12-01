@@ -31,7 +31,7 @@ public class ChallengeTDG {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "UPDATE challenge SET challenger = ?, challengee = ?, status= ?, deckOfChallenger=? WHERE id=? AND version = ?;"; 
+		String query = "UPDATE challenge SET challenger = ?, challengee = ?, status= ?, deckOfChallenger=?, version = version+1 WHERE id=? AND version = ?;"; 
 		
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challenger);

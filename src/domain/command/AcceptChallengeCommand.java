@@ -31,17 +31,17 @@ public class AcceptChallengeCommand extends AbstractCommand {
 			throw new CommandException("Cannot challenge yourself");
 		}
 		
-		if(challenge.getVersion() != (long)helper.getRequestAttribute("version")) {
+		if(challenge.getVersion() != (int)helper.getRequestAttribute("challengeVersion")) {
 			throw new LostUpdateException("Incorrect Version. Try refreshing your browser and trying again.");
 		}
 		
-		Challenge updatedChallenge = new Challenge(challenge.getId(), challenge.getChallenger(),challenge.getChallengee(),ChallengeStatus.accepted.ordinal(), challenge.getVersion()+1,challenge.getDeckOfChallenger());
+		Challenge updatedChallenge = new Challenge(challenge.getId(), challenge.getChallenger(),challenge.getChallengee(),ChallengeStatus.accepted.ordinal(), challenge.getVersion(),challenge.getDeckOfChallenger());
 		ChallengeOutputMapper.update(updatedChallenge);
 		
 		
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new CommandException(e.getMessage());
+			throw new CommandException(e.getMessage() + "IN PROCESS METHOD COMMAND");
 		}
 	}
 
