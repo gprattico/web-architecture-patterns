@@ -16,8 +16,9 @@ public class ChallengePlayerCommand extends AbstractCommand {
 	@Override
 	public void process() throws CommandException{
 		try {	
+			
 			Challenge challenge = new Challenge(ChallengeInputMapper.getMaxChallengeID(),
-			(long)helper.getRequestAttribute("id"), (long)helper.getRequestAttribute("playerID"),1,0,(long)helper.getRequestAttribute("deckUsedToChallenge"));//0 for challenge status, 1 for version
+			(long)helper.getSessionAttribute("id"), (long)helper.getRequestAttribute("playerID"),1,0,(long)helper.getRequestAttribute("deckUsedToChallenge"));//0 for challenge status, 1 for version
 			
 			ChallengeOutputMapper.insert(challenge);
 			//myRequest.setAttribute();

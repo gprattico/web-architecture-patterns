@@ -4,7 +4,7 @@
 {
 	"challenges": [
 		<c:forEach items="${challenge}" var="challenge" varStatus="loop">
-			{"id": "${challenge.id}", "version": "${challenge.version}", "challenger": "${challenge.challenger}", "challengee": "${challenge.challengee}", "status": "${challenge.status}", "deck": "${challenge.getChallengerDeckID}"}<c:if test="${!loop.last}">,</c:if>
+			{"id": "${challenge.id}", "version": "${challenge.version}", "challenger": "${challenge.challenger}", "challengee": "${challenge.challengee}", "status": "${challenge.status}", "deck": "${challenge.deckOfChallenger}"}<c:if test="${!loop.last}">,</c:if>
 		</c:forEach>
 	]
 }
