@@ -24,7 +24,7 @@ public class ViewBoardDispatcher extends AbstractDispatcher {
 	public void handleGet() throws IOException, ServletException {
 
 		try{
-			if(checkIfLoggedIn(myRequest)) {
+			//if(checkIfLoggedIn(myRequest)) {
 			String[] requestPath = myRequest.getServletPath().trim().split("/");
 			
 			myHelper.setRequestAttribute("gameID", Long.parseLong(requestPath[requestPath.length-1]));
@@ -33,10 +33,10 @@ public class ViewBoardDispatcher extends AbstractDispatcher {
 			viewBoard.process();
 			forward("/WEB-INF/jsp/ViewBoard.jsp");
 			
-			}else{
-				myRequest.setAttribute("message", "Challenge failed. You either don't have a deck, aren't logged in or tried challenging yourself!");
-				forward("/WEB-INF/jsp/Failure.jsp");
-			}
+//			}else{
+//				myRequest.setAttribute("message", "Challenge failed. You either don't have a deck, aren't logged in or tried challenging yourself!");
+//				forward("/WEB-INF/jsp/Failure.jsp");
+//			}
 		
 		
 		}catch(Exception e){

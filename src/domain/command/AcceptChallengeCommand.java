@@ -64,7 +64,7 @@ public class AcceptChallengeCommand extends AbstractCommand {
 		
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new CommandException(e.getMessage() + "IN PROCESS METHOD COMMAND");
+			throw new CommandException(e.getMessage());
 		}
 	}
 

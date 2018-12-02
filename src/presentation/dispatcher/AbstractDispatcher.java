@@ -36,6 +36,8 @@ public abstract class AbstractDispatcher extends Dispatcher{
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();
+			//throw new CommandException(e.getMessage()+ "in checkIFLoggedIN");
+			myHelper.setRequestAttribute("message", e.getMessage() + "in Check if logged in");
 			return false;
 		}
 		
@@ -58,6 +60,7 @@ public abstract class AbstractDispatcher extends Dispatcher{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			myHelper.setRequestAttribute("message", e.getMessage() + "in has deck");
 			return false;
 		}
 		
