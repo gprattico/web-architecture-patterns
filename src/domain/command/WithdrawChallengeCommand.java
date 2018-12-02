@@ -29,16 +29,23 @@ public class WithdrawChallengeCommand extends AbstractCommand {
 		Long challengerID = challenge.getChallenger();
 		Long userID = (long)helper.getSessionAttribute("id");
 		
-		if((long)challengerID!=(long)userID) {
-			throw new CommandException("This is not your challenge");
-		}
-		
 		if(challenge.getVersion() != (int)helper.getRequestAttribute("challengeVersion")) {
 			throw new LostUpdateException("Incorrect Version. Try refreshing your browser and trying again.");
 		}
-		challenge.setStatus(ChallengeStatus.withdrawn.ordinal());
 		
-		ChallengeOutputMapper.update(challenge);
+		if((long)challengerID==(long)userID) {
+			//throw new CommandException("This is not your challenge");
+			
+			challenge.setStatus(ChallengeStatus.withdrawn.ordinal());
+			ChallengeOutputMapper.update(challenge);
+			
+		}else {
+			
+			throw new CommandException("You didn't make this challenge.");
+			
+		}
+		
+	
 		
 		
 		}catch(Exception e) {
