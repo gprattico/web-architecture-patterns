@@ -1,6 +1,8 @@
 package domain.user;
 
-public class User {
+import domain.AbstractDomainObject;
+
+public class User extends AbstractDomainObject implements UserInterface {
 
 	private long id;
 	private int version;
