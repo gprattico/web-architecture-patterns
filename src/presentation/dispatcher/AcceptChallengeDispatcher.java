@@ -55,7 +55,7 @@ public class AcceptChallengeDispatcher extends AbstractDispatcher {
 		
 		}catch(Exception e){
 			e.printStackTrace();
-			myRequest.setAttribute("message", e.getMessage()+"IN ACCEPT CHALLLENGE DISPATCHER");
+			myRequest.setAttribute("message", e.getMessage());
 			forward("/WEB-INF/jsp/Failure.jsp");
 		
 		}

@@ -3,8 +3,8 @@
 
 {
 	"games": [
-		<c:forEach items="${challenge}" var="challenge" varStatus="loop">
-			{"id": ${challenge.id}, "players": ["${challenge.challengerID}", "${challenge.challengeeID}"]}<c:if test="${!loop.last}">,</c:if>
+		<c:forEach items="${gameList}" var="gameList" varStatus="loop">
+			{"id": ${gameList.id}, "version": ${gameList.version},"players": [${gameList.challengerID}, ${gameList.challengeeID}]}<c:if test="${!loop.last}">,</c:if>
 		</c:forEach>
 	]
 }

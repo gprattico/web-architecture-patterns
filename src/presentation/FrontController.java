@@ -16,6 +16,7 @@ import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.AcceptChallengeDispatcher;
 import presentation.dispatcher.ChallengeDispatcher;
 import presentation.dispatcher.ChallengePlayerDipatcher;
+import presentation.dispatcher.ListGamesDispatcher;
 import presentation.dispatcher.ListPlayersDispatcher;
 import presentation.dispatcher.LoginDispatcher;
 import presentation.dispatcher.LogoutDispatcher;
@@ -127,6 +128,8 @@ public class FrontController extends Servlet {
     		dispatcher = new RefuseChallengeDispatcher(request,response);
     	} else if (Pattern.compile("/Poke/Challenge"+"/\\d"+"/Withdraw").matcher(URL).matches()) {
     		dispatcher = new WithdrawChallengeDispatcher(request,response);
+    	} else if(URL.equals("/Poke/Game")) {
+    		dispatcher = new ListGamesDispatcher(request,response);
     	}
     	return dispatcher;
     	

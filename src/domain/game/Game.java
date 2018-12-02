@@ -6,13 +6,23 @@ public class Game {
 	private long challengerID;
 	private long challengeeID;
 	private long status;//status 0 if ongoing, 1 challenger wins, 2 challengee wins, 3 game retired
+	private int version;
 	
-	public Game(long id, long challengerID, long challengeeID, long status) {
+	public Game(long id, long challengerID, long challengeeID, long status, int version) {
 		super();
 		this.id = id;
 		this.challengerID = challengerID;
 		this.challengeeID = challengeeID;
 		this.status = status;
+		this.version = version;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public long getChallengerID() {
