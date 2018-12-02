@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.dsrg.soenea.application.servlet.Servlet;
 import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
+import org.dsrg.soenea.uow.UoW;
 
 import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.AcceptChallengeDispatcher;
