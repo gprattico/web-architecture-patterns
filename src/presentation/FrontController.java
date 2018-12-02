@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.dsrg.soenea.application.servlet.Servlet;
 import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
-import org.dsrg.soenea.uow.UoW;
 
 import presentation.dispatcher.AbstractDispatcher;
 import presentation.dispatcher.AcceptChallengeDispatcher;
@@ -72,7 +71,8 @@ public class FrontController extends Servlet {
 		
 		}catch(Exception e) {
 			//no URL
-			request.setAttribute("message","The URL you provided does not exist");
+			e.printStackTrace();
+			request.setAttribute("message","The URL you provided does not exist." + e.getMessage());
 			request.getRequestDispatcher("/WEB-INF/jsp/Failure.jsp").forward(request, response);
 			
 			//close the db in case we catch an exception im not aware of
@@ -127,13 +127,13 @@ public class FrontController extends Servlet {
     		dispatcher = new AcceptChallengeDispatcher(request,response);
     	} else if(Pattern.compile("/Poke/Challenge"+"/\\d+"+"/Refuse").matcher(URL).matches()) {
     		dispatcher = new RefuseChallengeDispatcher(request,response);
-    	} else if (Pattern.compile("/Poke/Challenge"+"/\\d"+"/Withdraw").matcher(URL).matches()) {
+    	} else if (Pattern.compile("/Poke/Challenge"+"/\\d+"+"/Withdraw").matcher(URL).matches()) {
     		dispatcher = new WithdrawChallengeDispatcher(request,response);
     	} else if(URL.equals("/Poke/Game")) {
     		dispatcher = new ListGamesDispatcher(request,response);
     	}
     	return dispatcher;
-    	
+    	//TestSuite.URL_BASE+"Poke/Challenge/" + challenge + "/Withdraw"), HttpMethod.POST)
     }
 
 }
