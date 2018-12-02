@@ -23,6 +23,7 @@ import presentation.dispatcher.LogoutDispatcher;
 import presentation.dispatcher.MultifunctionalDeckDispatcher;
 import presentation.dispatcher.RefuseChallengeDispatcher;
 import presentation.dispatcher.RegisterDispatcher;
+import presentation.dispatcher.ViewBoardDispatcher;
 import presentation.dispatcher.ViewDeckDispatcher;
 import presentation.dispatcher.WithdrawChallengeDispatcher;
 
@@ -129,6 +130,8 @@ public class FrontController extends Servlet {
     		dispatcher = new RefuseChallengeDispatcher(request,response);
     	} else if (Pattern.compile("/Poke/Challenge"+"/\\d+"+"/Withdraw").matcher(URL).matches()) {
     		dispatcher = new WithdrawChallengeDispatcher(request,response);
+    	} else if(Pattern.compile("/Poke/Game"+"/\\d+").matcher(URL).matches()) {
+    		dispatcher = new ViewBoardDispatcher(request,response); 	
     	} else if(URL.equals("/Poke/Game")) {
     		dispatcher = new ListGamesDispatcher(request,response);
     	}
