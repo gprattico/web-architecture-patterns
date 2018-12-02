@@ -45,8 +45,10 @@ public class AcceptChallengeCommand extends AbstractCommand {
 		ChallengeOutputMapper.update(challenge);
 		
 		//create new game
-		Game game = new Game(GameInputMapper.getMaxGameID(), challenge.getChallenger(), challenge.getChallengee(), 0, 1); //0 for in progress, 1 for version
+		 //0 for in progress, 1 for version, challenger id for currentTurn
+		Game game = new Game(GameInputMapper.getMaxGameID(), challenge.getChallenger(), challenge.getChallengee(), 0, 1, challenge.getChallenger());
 		GameOutputMapper.insert(game);
+		//bla bla draw card
 		
 		
 		}catch(Exception e) {

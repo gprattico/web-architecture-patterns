@@ -7,14 +7,16 @@ public class Game {
 	private long challengeeID;
 	private long status;//status 0 if ongoing, 1 challenger wins, 2 challengee wins, 3 game retired
 	private int version;
+	private long currentTurn;
 	
-	public Game(long id, long challengerID, long challengeeID, long status, int version) {
+	public Game(long id, long challengerID, long challengeeID, long status, int version, long currentTurn) {
 		super();
 		this.id = id;
 		this.challengerID = challengerID;
 		this.challengeeID = challengeeID;
 		this.status = status;
 		this.version = version;
+		this.currentTurn = currentTurn;
 	}
 
 	public int getVersion() {
@@ -51,5 +53,13 @@ public class Game {
 
 	public long getId() {
 		return id;
+	}
+	
+	public long getCurrentTurn() {
+		return currentTurn;
+	}
+
+	public void setCurrentTurn(long currentTurn) {
+		this.currentTurn = currentTurn;
 	}
 }
