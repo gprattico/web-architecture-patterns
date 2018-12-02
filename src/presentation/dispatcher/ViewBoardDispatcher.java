@@ -27,8 +27,14 @@ public class ViewBoardDispatcher extends AbstractDispatcher {
 			//if(checkIfLoggedIn(myRequest)) {
 			String[] requestPath = myRequest.getServletPath().trim().split("/");
 			
-			myHelper.setRequestAttribute("gameID", Long.parseLong(requestPath[requestPath.length-1]));
+			long gameID = Long.parseLong(requestPath[requestPath.length-1]);
+			
+			myHelper.setRequestAttribute("gameID", gameID);
+			
+			//myHelper.setRequestAttribute("gameID", Long.parseLong(requestPath[requestPath.length-1]));
 
+			System.out.println("game id in dispatcher is: "+gameID);
+			
 			ViewBoardCommand viewBoard = new ViewBoardCommand(myHelper);
 			viewBoard.process();
 			forward("/WEB-INF/jsp/ViewBoard.jsp");
