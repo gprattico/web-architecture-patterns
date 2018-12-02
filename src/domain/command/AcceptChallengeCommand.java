@@ -9,6 +9,9 @@ import domain.challenge.ChallengeInputMapper;
 import domain.challenge.ChallengeOutputMapper;
 import domain.challenge.ChallengeStatus;
 import domain.deck.DeckInputMapper;
+import domain.game.Game;
+import domain.game.GameInputMapper;
+import domain.game.GameOutputMapper;
 
 public class AcceptChallengeCommand extends AbstractCommand {
 
@@ -40,6 +43,10 @@ public class AcceptChallengeCommand extends AbstractCommand {
 		
 		challenge.setStatus(ChallengeStatus.accepted.ordinal());
 		ChallengeOutputMapper.update(challenge);
+		
+		//create new game
+		Game game = new Game(GameInputMapper.getMaxGameID(), challenge.getChallenger(), challenge.getChallengee(), 0);
+		GameOutputMapper.insert(game);
 		
 		
 		}catch(Exception e) {
