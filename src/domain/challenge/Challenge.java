@@ -81,7 +81,7 @@ public class Challenge {
 	
 	public long getChallengerDeckID() throws SQLException {
 		
-		return DeckInputMapper.find(this.challenger).getId();
+		return deckOfChallenger;
 		
 	}
 	
