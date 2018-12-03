@@ -20,7 +20,7 @@ public class ChallengeInputMapper {
 		
 		Challenge challenge =null;
 		if (rs.next()) {
-			challenge = new Challenge(rs.getLong("id"), rs.getLong("challenger"), rs.getLong("challengee"), rs.getInt("status"));
+			challenge = new Challenge(rs.getLong("id"), rs.getLong("challenger"), rs.getLong("challengee"), rs.getInt("status"), rs.getInt("version"), rs.getLong("deckOfChallenger"));
 		}
 		
 		rs.close();
@@ -36,7 +36,7 @@ public class ChallengeInputMapper {
 		ArrayList<Challenge> challengeList = new ArrayList<Challenge>();
 		Challenge challenge = null;
 		while (rs.next()) {
-			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4), rs.getInt("version"), rs.getLong("deckOfChallenger"));
 			challengeList.add(challenge);
 		}
 		
@@ -53,7 +53,7 @@ public class ChallengeInputMapper {
 		ArrayList<Challenge> challengeList = new ArrayList<Challenge>();
 		Challenge challenge = null;
 		while (rs.next()) {
-			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4),rs.getInt("version"), rs.getLong("deckOfChallenger"));
 			challengeList.add(challenge);
 		}
 		
@@ -70,7 +70,7 @@ public class ChallengeInputMapper {
 		ArrayList<Challenge> challengeList = new ArrayList<Challenge>();
 		Challenge challenge = null;
 		while(rs.next()){
-			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4),rs.getInt("version"),rs.getLong("deckOfChallenger"));
 			challengeList.add(challenge);
 		}
 		
@@ -86,13 +86,25 @@ public class ChallengeInputMapper {
 		ArrayList<Challenge> challengeList = new ArrayList<Challenge>();
 		Challenge challenge = null;
 		while(rs.next()){
-			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4));
+			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4),rs.getInt("version"),rs.getLong("deckOfChallenger"));
 			challengeList.add(challenge);
 		}
 		
 		rs.close();
 		
 		return challengeList;
+	}
+
+	public static Challenge findByChallengerAndChallengee(long challengerID, long challengeeID) throws SQLException {
+		// TODO Auto-generated method stub
+		ResultSet rs= ChallengeFinder.findByChallengerAndChallengee(challengerID,challengeeID);
+		
+		Challenge challenge = null;
+		if(rs.next())
+			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4),rs.getInt("version"),rs.getLong("deckOfChallenger"));
+			
+			
+		return challenge;
 	}
 	
 }

@@ -36,7 +36,7 @@ public class ChallengeFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT id, challenger, challengee, status FROM challenge WHERE id = ?;";
+		String query = "SELECT id, challenger, challengee, status, version, deckOfChallenger FROM challenge WHERE id = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, id);
 		ResultSet rs = ps.executeQuery();
@@ -57,7 +57,7 @@ public class ChallengeFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT id, challenger, challengee, status FROM challenge WHERE challenger = ? AND status = ?;";
+		String query = "SELECT id, challenger, challengee, status, version, deckOfChallenger FROM challenge WHERE challenger = ? AND status = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challenger);
 		ps.setInt(2, 0);//only concerned with open challenges
@@ -80,7 +80,7 @@ public class ChallengeFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT id, challenger, challengee, status FROM challenge WHERE challengee = ? AND status = ?;";
+		String query = "SELECT id, challenger, challengee, status, version, deckOfChallenger FROM challenge WHERE challengee = ? AND status = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challengee);
 		ps.setInt(2, 0);//open challenges
@@ -142,6 +142,21 @@ public class ChallengeFinder {
 		
 		return rs;
 		
+	}
+
+
+	public static ResultSet findByChallengerAndChallengee(long challengerID, long challengeeID) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM challenge WHERE challenger = ? AND challengee = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, challengerID);
+		ps.setLong(2, challengeeID);
+		ResultSet rs = ps.executeQuery();
+		
+		return rs;
 	}
 	
 	

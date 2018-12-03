@@ -56,11 +56,11 @@ public class GameFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT * FROM game WHERE challengerID=? OR challengeeID=?;";
+		String query = "SELECT * FROM game WHERE id=?;";
 		
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, attribute);
-		ps.setLong(2, attribute);
+		//ps.setLong(2, attribute);
 		ResultSet rs = ps.executeQuery();
 //		
 //		GameRDG game =null;

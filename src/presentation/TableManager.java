@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dsrg.soenea.service.MySQLConnectionFactory;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
+import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 
 /**
  * When we access this path, we truncate the tables.
@@ -19,7 +21,7 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
  * The SET_FOREIGN_KEYS to truncate the tables is taken from stack overflow
  */
 @WebServlet("/TableManager")
-public class TableManager extends AbstractController {
+public class TableManager extends FrontController{
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -33,6 +35,8 @@ public class TableManager extends AbstractController {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		startDb();
 		// TODO Auto-generated method stub
 		response.getWriter().append("Truncating tables ").append(request.getContextPath());
 		try {
@@ -91,5 +95,38 @@ public class TableManager extends AbstractController {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	public static synchronized void startDb() {
+    	
+    	try {
+    		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+    		
+    		String blank = "";
+    		
+    		MySQLConnectionFactory connection = new MySQLConnectionFactory(null, null, null, null);
+    		
+    		connection.defaultInitialization();
+    		
+    		DbRegistry.setConFactory(blank, connection);
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+	}
+	 public static void closeDb() {
+	    	try {
+	    		//thesis uses both of these methods, no idea why
+	    		DbRegistry.getDbConnection().close();
+	    		DbRegistry.closeDbConnectionIfNeeded();
+	    		}
+	    	catch (Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+	    	ThreadLocalTracker.purgeThreadLocal();
+	}
+	
+	
 
 }

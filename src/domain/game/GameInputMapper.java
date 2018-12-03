@@ -21,7 +21,7 @@ public class GameInputMapper {
 		ArrayList<Game> gameList = new ArrayList<Game>();
 		Game game = null;
 		while(rs.next()){
-			game = new Game(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getLong(4));
+			game = new Game(rs.getLong("id"),rs.getLong("challengerID"),rs.getLong("challengeeID"),rs.getLong("status"), rs.getInt("version"),rs.getLong("currentTurn"), rs.getLong("deckOfChallenger"), rs.getLong("deckOfChallengee"));
 			gameList.add(game);
 		}
 		
@@ -36,7 +36,7 @@ public class GameInputMapper {
 		
 		Game game =null;
 		if(rs.next()) {
-			game = new Game(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getLong(4));
+			game = new Game(rs.getLong("id"),rs.getLong("challengerID"),rs.getLong("challengeeID"),rs.getLong("status"), rs.getInt("version"),rs.getLong("currentTurn"), rs.getLong("deckOfChallenger"), rs.getLong("deckOfChallengee"));
 		}
 		
 		rs.close();
