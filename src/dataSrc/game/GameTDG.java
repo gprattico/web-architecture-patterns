@@ -24,7 +24,6 @@ public class GameTDG {
 		ps.setLong(8, deckOfChallengee);
 		int count = ps.executeUpdate();
 		ps.close();
-		System.out.println("count from insert is"+count);
 		return count;
 	}
 
@@ -48,17 +47,19 @@ public class GameTDG {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "UPDATE game SET challenger = ?, challengee= ?, status = ? , deckOfChallenger = ?, deckOfChallengee = ?,version = version +1, currentTurn = ? WHERE id=? AND version =?;";
+		String query = "UPDATE game SET challengerID = ?, challengeeID= ?, status = ? , deckOfChallenger = ?, deckOfChallengee = ?,version = version +1, currentTurn = ? WHERE id=? AND version =?;";
 		
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challengerID);
 		ps.setLong(2, challengeeID);
 		ps.setLong(3, status);
-		ps.setLong(7, id);
-		ps.setInt(8, version);
-		ps.setLong(6, currentTurn);
 		ps.setLong(4, deckOfChallenger);
 		ps.setLong(5, deckOfChallengee);
+		ps.setLong(6, currentTurn);
+		ps.setLong(7, id);
+		ps.setInt(8, version);
+
+
 		
 		int count = ps.executeUpdate();
 		
