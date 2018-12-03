@@ -18,7 +18,9 @@ public class ChallengePlayerCommand extends AbstractCommand {
 	public void process() throws CommandException{
 		try {
 			
-			if(ChallengeInputMapper.findByChallengerAndChallengee((long)helper.getSessionAttribute("id"),(long)helper.getRequestAttribute("playerID")) != null) {
+			Challenge existing = ChallengeInputMapper.findByChallengerAndChallengee((long)helper.getSessionAttribute("id"),(long)helper.getRequestAttribute("playerID")); 
+			
+			if( (existing!= null) && existing.getStatus()==0) {
 			throw new CommandException("youve already challenge this person.");
 			}
 			Challenge challenge = new Challenge(ChallengeInputMapper.getMaxChallengeID(),

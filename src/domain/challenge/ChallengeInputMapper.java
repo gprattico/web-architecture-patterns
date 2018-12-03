@@ -95,7 +95,7 @@ public class ChallengeInputMapper {
 		return challengeList;
 	}
 
-	public static Object findByChallengerAndChallengee(long challengerID, long challengeeID) throws SQLException {
+	public static Challenge findByChallengerAndChallengee(long challengerID, long challengeeID) throws SQLException {
 		// TODO Auto-generated method stub
 		ResultSet rs= ChallengeFinder.findByChallengerAndChallengee(challengerID,challengeeID);
 		
