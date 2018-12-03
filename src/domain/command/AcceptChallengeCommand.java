@@ -61,6 +61,11 @@ public class AcceptChallengeCommand extends AbstractCommand {
 		Deck deck = DeckInputMapper.find(challenge.getChallengerDeckID());
 		ArrayList<Card> cardList = CardInputMapper.findAll(deck.getId());
 		cardList.get(0).setStatus(1);//drawing the first card is equivalent to setting its status to in the hand (1)
+		for(Card iterator:cardList) {
+			iterator.setGame(game.getId());
+			CardOutputMapper.update(iterator);
+		}
+		
 		CardOutputMapper.update(cardList.get(0));
 		
 		

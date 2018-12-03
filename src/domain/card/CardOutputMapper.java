@@ -16,13 +16,13 @@ public class CardOutputMapper {
 
 	public static void insert(Card card) throws SQLException {
 
-		CardTDG.insert(card.getId(), card.getDeck(), card.getType(), card.getName(), card.getStatus());
+		CardTDG.insert(card.getId(), card.getDeck(), card.getType(), card.getName(), card.getStatus(), card.getGame());
 	
 	}
 	
 	public static void update(Card card) throws SQLException {
 		
-		CardTDG.update(card.getId(), card.getDeck(), card.getType(), card.getName(), card.getStatus());
+		CardTDG.update(card.getId(), card.getDeck(), card.getType(), card.getName(), card.getStatus(), card.getGame());
 	
 	}
 	

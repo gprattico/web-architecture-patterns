@@ -134,6 +134,8 @@ public class FrontController extends Servlet {
     		dispatcher = new ViewBoardDispatcher(request,response); 	
     	} else if(URL.equals("/Poke/Game")) {
     		dispatcher = new ListGamesDispatcher(request,response);
+    	} else if(Pattern.compile("/Poke/Game"+"\\d+"+"/Hand").matcher(URL).matches()) {
+    		dispatcher = new ViewHandDispatcher(request,response);
     	}
     	return dispatcher;
     	//TestSuite.URL_BASE+"Poke/Challenge/" + challenge + "/Withdraw"), HttpMethod.POST)

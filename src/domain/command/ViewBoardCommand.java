@@ -29,15 +29,15 @@ public class ViewBoardCommand extends AbstractCommand {
 			Deck challengerDeck = DeckInputMapper.find(game.getDeckOfChallenger());
 			Deck challengeeDeck = DeckInputMapper.find(game.getDeckOfChallengee());
 			//arraylist of cards in hand
-			ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckInputMapper.find(game.getDeckOfChallenger()).getId());
-			ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckInputMapper.find(game.getDeckOfChallengee()).getId());
+			ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckInputMapper.find(game.getDeckOfChallenger()).getId(),game.getId());
+			ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckInputMapper.find(game.getDeckOfChallengee()).getId(),game.getId());
 			
 			//arrayList of all cards attributed to them
 			ArrayList<Card> challengerDeckList = CardInputMapper.findAll(challengerDeck.getId());
 			ArrayList<Card> challengeeDeckList = CardInputMapper.findAll(challengeeDeck.getId());
 			
-			ArrayList<Card> benchedListChallenger = CardInputMapper.findAllBenched(DeckInputMapper.find(game.getDeckOfChallenger()).getId());
-			ArrayList<Card> benchedListChallengee = CardInputMapper.findAllBenched(DeckInputMapper.find(game.getDeckOfChallengee()).getId());
+			ArrayList<Card> benchedListChallenger = CardInputMapper.findAllBenched(DeckInputMapper.find(game.getDeckOfChallenger()).getId(),game.getId());
+			ArrayList<Card> benchedListChallengee = CardInputMapper.findAllBenched(DeckInputMapper.find(game.getDeckOfChallengee()).getId(),game.getId());
 			//deck size is number of cards status =0
 			int deckSize1=0;
 			int deckSize2=0;

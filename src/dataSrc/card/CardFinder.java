@@ -56,13 +56,14 @@ public class CardFinder {
 	}
 	
 	
-	public static ResultSet findAllInHand(long deckID) throws SQLException {
+	public static ResultSet findAllInHand(long deckID, long game) throws SQLException {
 
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT * FROM card WHERE deck = ? AND status = 1;";
+		String query = "SELECT * FROM card WHERE deck = ? AND status = 1 AND game = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, deckID);
+		ps.setLong(2, game);
 		ResultSet rs = ps.executeQuery();
 		
 //		//temp user
@@ -77,13 +78,14 @@ public class CardFinder {
 		return rs;
 	}
 	
-	public static ResultSet findAllBenched(long deckID) throws SQLException {
+	public static ResultSet findAllBenched(long deckID, long game) throws SQLException {
 
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT * FROM card WHERE deck = ? AND status = 3;";
+		String query = "SELECT * FROM card WHERE deck = ? AND status = 3 AND game=?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, deckID);
+		ps.setLong(2, game);
 		ResultSet rs = ps.executeQuery();
 		
 		

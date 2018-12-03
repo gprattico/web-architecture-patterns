@@ -65,7 +65,7 @@ public class UploadDeckCommand extends AbstractCommand {
 						//CardRDG card=null;
 						Card card =null;
 							for(String i : deckArray){
-							card = new Card(CardInputMapper.getMaxCardID(),deckID,i.substring(0, 1),i.substring(2),0);//0 because in deck
+							card = new Card(CardInputMapper.getMaxCardID(),deckID,i.substring(0, 1),i.substring(2),0,(Long) null);//0 because in deck
 							CardOutputMapper.insert(card);
 							}
 							helper.setRequestAttribute("message", "Added new deck");

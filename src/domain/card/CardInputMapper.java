@@ -14,7 +14,7 @@ public class CardInputMapper {
 		
 		ArrayList<Card> cardList = new ArrayList<Card>(); 
 		while (rs.next()) {
-			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status"), rs.getLong("game")));
 		}
 		
 		rs.close();
@@ -23,13 +23,13 @@ public class CardInputMapper {
 		
 	}
 	
-	public static ArrayList<Card> findAllInHand(long id) throws SQLException {
+	public static ArrayList<Card> findAllInHand(long id, long game) throws SQLException {
 		
-		ResultSet rs = CardFinder.findAllInHand(id);
+		ResultSet rs = CardFinder.findAllInHand(id, game);
 		
 		ArrayList<Card> cardList = new ArrayList<Card>(); 
 		while (rs.next()) {
-			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status"), rs.getLong("game")));
 		}
 		
 		rs.close();
@@ -37,13 +37,13 @@ public class CardInputMapper {
 		return cardList;
 	}
 	
-	public static ArrayList<Card> findAllBenched(long id) throws SQLException{
+	public static ArrayList<Card> findAllBenched(long id, long game) throws SQLException{
 		
-		ResultSet rs = CardFinder.findAllBenched(id);
+		ResultSet rs = CardFinder.findAllBenched(id, game);
 		
 		ArrayList<Card> cardList = new ArrayList<Card>(); 
 		while (rs.next()) {
-			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status")));
+			cardList.add(new Card(rs.getInt("id"), rs.getInt("deck"), rs.getString("type"), rs.getString("name"),rs.getInt("status"), rs.getLong("game")));
 		}
 		
 		rs.close();
