@@ -26,18 +26,18 @@ public class ViewBoardCommand extends AbstractCommand {
 			Game game = GameInputMapper.find(gameID);
 		if(game.getChallengerID() == (long)helper.getSessionAttribute("id") || game.getChallengeeID() == (long)helper.getSessionAttribute("id")) {
 
-			Deck challengerDeck = DeckInputMapper.findByUserID((long)game.getChallengerID());
-			Deck challengeeDeck = DeckInputMapper.findByUserID((long)game.getChallengeeID());
+			Deck challengerDeck = DeckInputMapper.find(game.getDeckOfChallenger());
+			Deck challengeeDeck = DeckInputMapper.find(game.getDeckOfChallengee());
 			//arraylist of cards in hand
-			ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckInputMapper.findByUserID(game.getChallengerID()).getId());
-			ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckInputMapper.findByUserID(game.getChallengeeID()).getId());
+			ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckInputMapper.find(game.getDeckOfChallenger()).getId());
+			ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckInputMapper.find(game.getDeckOfChallengee()).getId());
 			
 			//arrayList of all cards attributed to them
 			ArrayList<Card> challengerDeckList = CardInputMapper.findAll(challengerDeck.getId());
 			ArrayList<Card> challengeeDeckList = CardInputMapper.findAll(challengeeDeck.getId());
 			
-			ArrayList<Card> benchedListChallenger = CardInputMapper.findAllBenched(DeckInputMapper.findByUserID(game.getChallengerID()).getId());
-			ArrayList<Card> benchedListChallengee = CardInputMapper.findAllBenched(DeckInputMapper.findByUserID(game.getChallengeeID()).getId());
+			ArrayList<Card> benchedListChallenger = CardInputMapper.findAllBenched(DeckInputMapper.find(game.getDeckOfChallenger()).getId());
+			ArrayList<Card> benchedListChallengee = CardInputMapper.findAllBenched(DeckInputMapper.find(game.getDeckOfChallengee()).getId());
 			//deck size is number of cards status =0
 			int deckSize1=0;
 			int deckSize2=0;

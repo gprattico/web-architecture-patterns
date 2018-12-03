@@ -25,7 +25,6 @@ public class AcceptChallengeDispatcher extends AbstractDispatcher {
 			//check if im logged in, i have a deck and the challenge i am accepting exists
 			if(checkIfLoggedIn(myRequest)&&hasDeck(myRequest)&&(ChallengeInputMapper.find(Long.parseLong(requestPath[requestPath.length-2]))!=null)){
 				
-//				String[] requestPath = myRequest.getServletPath().trim().split("/");
 				Long challengeID = Long.parseLong(requestPath[requestPath.length-2]);
 				myHelper.setRequestAttribute("challengeID", challengeID);
 				long deckUsedToAcceptChallenge = Long.parseLong(myRequest.getParameter("deck"));
@@ -33,15 +32,6 @@ public class AcceptChallengeDispatcher extends AbstractDispatcher {
 
 				int challengeVersion = Integer.parseInt(myRequest.getParameter("version"));
 				myHelper.setRequestAttribute("challengeVersion", challengeVersion);
-//				//check if deck exists
-//				if(DeckInputMapper.find(deckUsedToAcceptChallenge) == null) {
-//					throw new Exception("Deck id does not exist");
-//				}
-//				if(ChallengeInputMapper.find(challengeID).getChallenger() == CurrentSession(myRequest)) {
-//					throw new Exception("Cannot challenge yourself");
-//				}
-//				
-//				
 				
 				//ChallengePlayerCommand challengePlayer = new ChallengePlayerCommand(myHelper);
 				AcceptChallengeCommand acceptChallenge = new AcceptChallengeCommand(myHelper);

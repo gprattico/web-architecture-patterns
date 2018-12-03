@@ -8,13 +8,13 @@ public class GameOutputMapper {
 	
 	public static void insert(Game game) throws SQLException {
 
-		GameTDG.insert(game.getId(), game.getChallengerID(), game.getChallengeeID(), game.getStatus(), game.getVersion(), game.getCurrentTurn());
+		GameTDG.insert(game.getId(), game.getChallengerID(), game.getChallengeeID(), game.getStatus(), game.getVersion(), game.getCurrentTurn(),game.getDeckOfChallenger(),game.getDeckOfChallengee());
 	
 	}
 	
 	public static void update(Game game) throws SQLException {
 		
-		GameTDG.update(game.getId(), game.getChallengerID(), game.getChallengeeID(), game.getStatus(), game.getVersion(), game.getCurrentTurn());
+		GameTDG.update(game.getId(), game.getChallengerID(), game.getChallengeeID(), game.getStatus(), game.getVersion(), game.getCurrentTurn(),game.getDeckOfChallenger(),game.getDeckOfChallengee());
 	
 	}
 	

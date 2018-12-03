@@ -50,13 +50,15 @@ public class AcceptChallengeCommand extends AbstractCommand {
 		challenge.setStatus(ChallengeStatus.accepted.ordinal());
 		ChallengeOutputMapper.update(challenge);
 		
+//		long test = Long.parseLong((String)helper.getRequestAttribute("deck"));
+		//System.out.println("deck used is:"+helper.getLong("deck"));
 		//create new game
 		 //0 for in progress, 1 for version, challenger id for currentTurn
-		Game game = new Game(GameInputMapper.getMaxGameID(), challenge.getChallenger(), challenge.getChallengee(), 0, 1, challenge.getChallenger());
+		Game game = new Game(GameInputMapper.getMaxGameID(), challenge.getChallenger(), challenge.getChallengee(), 0, 1, challenge.getChallenger(),challenge.getChallengerDeckID(),(long)helper.getRequestAttribute("deckUsedToAcceptChallenge"));
 		GameOutputMapper.insert(game);
 		//draw card
 		//end turn will let players draw afterward
-		Deck deck = DeckInputMapper.findByUserID(challenge.getChallenger());
+		Deck deck = DeckInputMapper.find(challenge.getChallengerDeckID());
 		ArrayList<Card> cardList = CardInputMapper.findAll(deck.getId());
 		cardList.get(0).setStatus(1);//drawing the first card is equivalent to setting its status to in the hand (1)
 		CardOutputMapper.update(cardList.get(0));
