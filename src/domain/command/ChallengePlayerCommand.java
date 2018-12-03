@@ -16,7 +16,11 @@ public class ChallengePlayerCommand extends AbstractCommand {
 	}
 	@Override
 	public void process() throws CommandException{
-		try {	
+		try {
+			
+			if(ChallengeInputMapper.findByChallengerAndChallengee((long)helper.getSessionAttribute("id"),(long)helper.getRequestAttribute("playerID")) != null) {
+			throw new CommandException("youve already challenge this person.");
+			}
 			Challenge challenge = new Challenge(ChallengeInputMapper.getMaxChallengeID(),
 			(long)helper.getSessionAttribute("id"), (long)helper.getRequestAttribute("playerID"),ChallengeStatus.open.ordinal(),1,(long)helper.getRequestAttribute("deckUsedToChallenge"));//0 for challenge status, 1 for version
 			

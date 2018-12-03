@@ -150,10 +150,10 @@ public class ChallengeFinder {
 		
 		Connection con = DbRegistry.getDbConnection();
 		
-		String query = "SELECT * FROM challenge WHERE challengerID = ? AND challengeeID = ?;";
+		String query = "SELECT * FROM challenge WHERE challenger = ? AND challengee = ?;";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setLong(1, challengerID);
-		ps.setLong(1, challengeeID);
+		ps.setLong(2, challengeeID);
 		ResultSet rs = ps.executeQuery();
 		
 		return rs;
