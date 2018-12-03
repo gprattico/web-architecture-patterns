@@ -19,6 +19,7 @@ public class DeckInputMapper {
 
 		Deck deck = null;
 		if (rs.next()) {
+			System.out.println("made it to deck find if statement");
 			deck = new Deck(rs.getLong("id"), rs.getLong("userID"));
 		}
 		

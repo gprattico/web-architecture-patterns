@@ -36,7 +36,7 @@ public class GameInputMapper {
 		
 		Game game =null;
 		if(rs.next()) {
-			game = new Game(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getLong(4), rs.getInt(5),rs.getLong(6));
+			game = new Game(rs.getLong("id"),rs.getLong("challengerID"),rs.getLong("challengeeID"),rs.getLong("status"), rs.getInt("version"),rs.getLong("currentTurn"));
 		}
 		
 		rs.close();

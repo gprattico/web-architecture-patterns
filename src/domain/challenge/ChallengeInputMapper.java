@@ -94,5 +94,17 @@ public class ChallengeInputMapper {
 		
 		return challengeList;
 	}
+
+	public static Object findByChallengerAndChallengee(long challengerID, long challengeeID) throws SQLException {
+		// TODO Auto-generated method stub
+		ResultSet rs= ChallengeFinder.findByChallengerAndChallengee(challengerID,challengeeID);
+		
+		Challenge challenge = null;
+		if(rs.next())
+			challenge = new Challenge(rs.getLong(1),rs.getLong(2),rs.getLong(3),rs.getInt(4),rs.getInt("version"),rs.getLong("deckOfChallenger"));
+			
+			
+		return challenge;
+	}
 	
 }

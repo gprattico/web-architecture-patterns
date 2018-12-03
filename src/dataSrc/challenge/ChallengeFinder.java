@@ -143,6 +143,21 @@ public class ChallengeFinder {
 		return rs;
 		
 	}
+
+
+	public static ResultSet findByChallengerAndChallengee(long challengerID, long challengeeID) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		Connection con = DbRegistry.getDbConnection();
+		
+		String query = "SELECT * FROM challenge WHERE challengerID = ? AND challengeeID = ?;";
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setLong(1, challengerID);
+		ps.setLong(1, challengeeID);
+		ResultSet rs = ps.executeQuery();
+		
+		return rs;
+	}
 	
 	
 

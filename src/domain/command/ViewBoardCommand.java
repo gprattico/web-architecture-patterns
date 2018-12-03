@@ -21,14 +21,13 @@ public class ViewBoardCommand extends AbstractCommand {
 	@Override
 	public void process() throws CommandException {
 		try {
-		Game game = GameInputMapper.find((long)helper.getRequestAttribute("gameID"));
-		
-	//	if(game.getChallengerID() == (long)helper.getSessionAttribute("id") || game.getChallengeeID() == (long)helper.getSessionAttribute("id")) {
+			
+			long gameID = (long)helper.getRequestAttribute("swagID");
+			Game game = GameInputMapper.find(gameID);
+		if(game.getChallengerID() == (long)helper.getSessionAttribute("id") || game.getChallengeeID() == (long)helper.getSessionAttribute("id")) {
 
-			Deck challengerDeck = DeckInputMapper.findByUserID(game.getChallengerID());
-			System.out.println("challenger user ID: "+ challengerDeck.getUserID());
-			Deck challengeeDeck = DeckInputMapper.findByUserID(game.getChallengeeID());
-			System.out.println("challengee user ID: "+challengeeDeck.getUserID());
+			Deck challengerDeck = DeckInputMapper.findByUserID((long)game.getChallengerID());
+			Deck challengeeDeck = DeckInputMapper.findByUserID((long)game.getChallengeeID());
 			//arraylist of cards in hand
 			ArrayList<Card> challengerHandList = CardInputMapper.findAllInHand(DeckInputMapper.findByUserID(game.getChallengerID()).getId());
 			ArrayList<Card> challengeeHandList = CardInputMapper.findAllInHand(DeckInputMapper.findByUserID(game.getChallengeeID()).getId());
@@ -85,9 +84,9 @@ public class ViewBoardCommand extends AbstractCommand {
 			
 			
 			
-//		else {
-//			throw new CommandException("cant look at a game that is not yours");
-//		}
+		}else {
+			throw new CommandException("cant look at a game that is not yours");
+		}
 		}catch(Exception e) {
 			e.printStackTrace();
 			helper.setRequestAttribute("message", e.getMessage());

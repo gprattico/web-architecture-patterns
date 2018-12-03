@@ -17,7 +17,6 @@ public class ChallengePlayerCommand extends AbstractCommand {
 	@Override
 	public void process() throws CommandException{
 		try {	
-			
 			Challenge challenge = new Challenge(ChallengeInputMapper.getMaxChallengeID(),
 			(long)helper.getSessionAttribute("id"), (long)helper.getRequestAttribute("playerID"),ChallengeStatus.open.ordinal(),1,(long)helper.getRequestAttribute("deckUsedToChallenge"));//0 for challenge status, 1 for version
 			
@@ -27,8 +26,6 @@ public class ChallengePlayerCommand extends AbstractCommand {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println(e.getCause());
-			System.out.println(e.getMessage());
 			throw new CommandException(e.getMessage());
 		}
 	}
