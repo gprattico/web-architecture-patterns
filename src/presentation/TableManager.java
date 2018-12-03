@@ -65,10 +65,6 @@ public class TableManager extends FrontController{
 			String query7="truncate table game;";
 			ps = con.prepareStatement(query7);
 			rs = ps.executeUpdate();
-
-			String query8="truncate table hand;";
-			ps = con.prepareStatement(query8);
-			rs = ps.executeUpdate();
 			
 			String query6 = "SET FOREIGN_KEY_CHECKS = 1;"; 
 			ps = con.prepareStatement(query6);

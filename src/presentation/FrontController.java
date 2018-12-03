@@ -46,7 +46,7 @@ public class FrontController extends Servlet {
     	
     	//start the Db
     	startDb();
-    	//add UoW
+    	
     }
 
 	@Override
